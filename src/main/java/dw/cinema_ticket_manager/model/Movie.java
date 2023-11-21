@@ -3,8 +3,8 @@ package dw.cinema_ticket_manager.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Entity
@@ -23,11 +23,11 @@ public class Movie {
             name = "movie_genre",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
-    private Set<Genre> genres;
+    private List<Genre> genres;
 
     public Movie(){}
 
-    public Movie(String title, String description, int runtime, int releaseYear, Set<Genre> genres) {
+    public Movie(String title, String description, int runtime, int releaseYear, List<Genre> genres) {
         this.title = title;
         this.description = description;
         this.runtime = runtime;

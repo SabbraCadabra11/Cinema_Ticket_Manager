@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -27,11 +27,11 @@ public class Booking {
     @JoinTable(name = "booking_seats",
                 joinColumns = @JoinColumn(name = "booking_id"),
                 inverseJoinColumns = @JoinColumn(name = "seat_id"))
-    private Set<Seat> bookedSeats;
+    private List<Seat> bookedSeats;
 
     public Booking() {}
 
-    public Booking(Showtime showtime, Set<Seat> bookedSeats) {
+    public Booking(Showtime showtime, List<Seat> bookedSeats) {
         this.showtime = showtime;
         this.bookedSeats = bookedSeats;
     }

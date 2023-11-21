@@ -3,6 +3,7 @@ package dw.cinema_ticket_manager.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,14 +17,19 @@ public class Room {
     private long id;
     @OneToMany(mappedBy = "room")
     private List<Showtime> showtimes;
+    @OneToMany(mappedBy = "room")
+    private List<Seat> seats;
     @Column(name = "room_number")
     private int roomNumber;
+    private int rows;
+    private int columns;
 
     public Room() {}
 
-    public Room(List<Showtime> showtimes, int roomNumber) {
-        this.showtimes = showtimes;
+    public Room(int roomNumber, int rows, int columns) {
         this.roomNumber = roomNumber;
+        this.rows = rows;
+        this.columns = columns;
     }
 
     @Override

@@ -3,9 +3,7 @@ package dw.cinema_ticket_manager.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Entity
@@ -13,16 +11,17 @@ import java.util.Set;
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long genre_id;
+    @Column(name = "genre_id")
+    private long id;
     private String name;
     @ManyToMany(mappedBy = "genres")
-    private Set<Movie> movies;
+    private List<Movie> movies;
 
     public Genre() {}
 
     public Genre(String name) {
         this.name = name;
-        movies = new HashSet<>();
+        movies = new ArrayList<>();
     }
 
     public void addMovie(Movie movie) {

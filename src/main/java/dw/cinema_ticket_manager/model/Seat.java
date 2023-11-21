@@ -15,24 +15,23 @@ public class Seat {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "showtime_id", nullable = false)
-    private Showtime showtime;
+    @JoinColumn(name = "room_id", nullable = false)
+    private Room room;
 
     @Column(name = "seat_number")
     private String seatNumber;
-
     private boolean available;
 
     public Seat() {}
 
-    public Seat(Showtime showtime, String seatNumber, boolean available) {
-        this.showtime = showtime;
+    public Seat(Room room, String seatNumber, boolean available) {
+        this.room = room;
         this.seatNumber = seatNumber;
         this.available = available;
     }
 
-    public Seat(Showtime showtime, String seatNumber) {
-        this.showtime = showtime;
+    public Seat(Room room, String seatNumber) {
+        this.room = room;
         this.seatNumber = seatNumber;
         this.available = true;
     }
@@ -42,19 +41,19 @@ public class Seat {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Seat seat = (Seat) o;
-        return Objects.equals(showtime, seat.showtime) && Objects.equals(seatNumber, seat.seatNumber);
+        return Objects.equals(room, seat.room) && Objects.equals(seatNumber, seat.seatNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(showtime, seatNumber);
+        return Objects.hash(room, seatNumber);
     }
 
     @Override
     public String toString() {
         return "Seat{" +
                 "id=" + id +
-                ", showtime=" + showtime +
+                ", room=" + room +
                 ", seatNumber='" + seatNumber + '\'' +
                 ", available=" + available +
                 '}';

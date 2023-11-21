@@ -22,12 +22,13 @@ public class Showtime {
     @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 
-    @Column(name = "room")
-    private int room;
+    @ManyToOne
+    @JoinColumn(name = "room_id", nullable = false)
+    private Room room;
 
     public Showtime() {}
 
-    public Showtime(LocalDateTime eventDateTime, Movie movie, int room) {
+    public Showtime(LocalDateTime eventDateTime, Movie movie, Room room) {
         this.eventDateTime = eventDateTime;
         this.movie = movie;
         this.room = room;
@@ -38,7 +39,8 @@ public class Showtime {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Showtime showtime = (Showtime) o;
-        return room == showtime.room && Objects.equals(eventDateTime, showtime.eventDateTime) && Objects.equals(movie, showtime.movie);
+        return room == showtime.room && Objects.equals(eventDateTime, showtime.eventDateTime)
+                && Objects.equals(movie, showtime.movie);
     }
 
     @Override
