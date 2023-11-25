@@ -2,11 +2,14 @@ package dw.cinema_ticket_manager.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "rooms")
 public class Room {
@@ -29,6 +32,25 @@ public class Room {
         this.roomNumber = roomNumber;
         this.rows = rows;
         this.columns = columns;
+    }
+
+    public Room(List<Seat> seats, int roomNumber, int rows, int columns) {
+        this.showtimes = new ArrayList<>();
+        this.seats = seats;
+        this.roomNumber = roomNumber;
+        this.rows = rows;
+        this.columns = columns;
+
+        for (Seat seat : seats) {
+            seat.setRoom(this);
+        }
+    }
+
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
+        for (Seat seat : this.seats) {
+            seat.setRoom(this);
+        }
     }
 
     @Override

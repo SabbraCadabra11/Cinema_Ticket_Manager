@@ -2,11 +2,13 @@ package dw.cinema_ticket_manager.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "showtimes")
 public class Showtime {

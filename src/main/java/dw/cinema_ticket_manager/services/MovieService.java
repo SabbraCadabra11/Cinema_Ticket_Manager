@@ -1,6 +1,5 @@
 package dw.cinema_ticket_manager.services;
 
-import dw.cinema_ticket_manager.model.Genre;
 import dw.cinema_ticket_manager.model.Movie;
 
 import java.util.List;

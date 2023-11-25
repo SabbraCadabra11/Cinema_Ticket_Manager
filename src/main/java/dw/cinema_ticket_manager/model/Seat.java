@@ -2,10 +2,12 @@ package dw.cinema_ticket_manager.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "seats")
 public class Seat {
@@ -23,12 +25,6 @@ public class Seat {
     private boolean available;
 
     public Seat() {}
-
-    public Seat(Room room, String seatNumber, boolean available) {
-        this.room = room;
-        this.seatNumber = seatNumber;
-        this.available = available;
-    }
 
     public Seat(Room room, String seatNumber) {
         this.room = room;
