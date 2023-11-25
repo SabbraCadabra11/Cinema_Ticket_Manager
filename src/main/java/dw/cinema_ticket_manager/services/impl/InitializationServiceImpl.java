@@ -24,6 +24,11 @@ public class InitializationServiceImpl implements InitializationService {
 
     @Override
     public void initialize() {
+        setUpRooms();
+    }
+
+    @Override
+    public void setUpRooms() {
         Room room1 = new Room(1, 10, 10);
         Room room2 = new Room(1, 10, 10);
         List<Seat> seats1 = createSeats(room1);

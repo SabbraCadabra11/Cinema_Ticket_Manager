@@ -25,8 +25,9 @@ public class Genre {
     }
 
     public void addMovie(Movie movie) {
-        if (movies.contains(movie))
+        if (movies.contains(movie)) {
             return;
+        }
 
         movies.add(movie);
     }
