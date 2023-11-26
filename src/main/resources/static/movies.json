@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Napoleon",
+    "description": "Napoleon Bonaparte pnie się po kolejnych szczeblach władzy. Towarzyszy mu przy tym ukochana Józefina.",
+    "runtime": 158,
+    "releaseYear": 2023,
+    "genres": ["Biograficzny", "Dramat"]
+  },
+  {
+    "title": "Życzenie",
+    "description": "Nastoletnia Asha z pomocą przyjaciół oraz magicznej gwiazdy z nieba stawia czoła złemu władcy, by ocalić swoją społeczność.",
+    "runtime": 158,
+    "releaseYear": 2023,
+    "genres": ["Animacja", "Familijny"]
+  }
+
+]

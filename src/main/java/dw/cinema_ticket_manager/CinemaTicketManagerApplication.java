@@ -21,7 +21,7 @@ public class CinemaTicketManagerApplication implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args) {
 		initializationService.initialize();
 	}
 }
