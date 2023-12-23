@@ -1,17 +1,89 @@
 [
   {
-    "title": "Napoleon",
-    "description": "Napoleon Bonaparte pnie się po kolejnych szczeblach władzy. Towarzyszy mu przy tym ukochana Józefina.",
-    "runtime": 158,
+    "title": "Chłopi",
+    "description": "„Chłopi” to film zrealizowany w technice animacji malarskiej, która podbiła serca fanów na całym świecie przy poprzedniej produkcji studia – filmie „Twój Vincent”. Historia filmu oparta jest na powieści Władysława Reymonta, który w 1924 roku otrzymał Literacką Nagrodę Nobla wyprzedzając Thomasa Manna, George'a Bernarda Shawa i Thomasa Hardy'ego.",
+    "runtime": 116,
     "releaseYear": 2023,
-    "genres": ["Biograficzny", "Dramat"]
+    "genres": [
+      {
+        "name": "Dramat"
+      },
+      {
+        "name": "Animowany"
+      }
+    ]
   },
   {
-    "title": "Życzenie",
-    "description": "Nastoletnia Asha z pomocą przyjaciół oraz magicznej gwiazdy z nieba stawia czoła złemu władcy, by ocalić swoją społeczność.",
+    "title": "Napoleon",
+    "description": "„Napoleon\" to monumentalne widowisko, przedstawiające drogę do władzy jednej z najbardziej znaczących postaci światowej historii - Napoleona Bonaparte, w którego rolę wcielił się laureat Oscara Joaquin Phoenix.",
     "runtime": 158,
     "releaseYear": 2023,
-    "genres": ["Animacja", "Familijny"]
+    "genres": [
+      {
+        "name": "Dramat"
+      },
+      {
+        "name": "Historyczny"
+      }
+    ]
+  },
+  {
+    "title": "Chłopcy z ferajny",
+    "description": "Kilkunastoletni Henry i Tommy DeVito trafiają pod opiekę potężnego gangstera. Obaj szybko uczą się panujących w mafii reguł.",
+    "runtime": 146,
+    "releaseYear": 1990,
+    "genres": [
+      {
+        "name": "Dramat"
+      },
+      {
+        "name": "Gangsterski"
+      }
+    ]
+  },
+  {
+    "title": "Akira",
+    "description": "Członek gangu motocyklowego zostaje poddany eksperymentom. Chłopak zyskuje dzięki nim wielką moc, nad którą nie jest w stanie zapanować. Akcja rozgrywa się w przyszłości w Tokio i opowiada o przygodach Kanedy, dowódcy gangu motocyklowego i jego przyjaciół. Jeden z nich - Tetsuo - zostaje porwany przez wojsko, które pragnie go użyć przy tajnym projekcie o nazwie Akira. Kaneda postanawia ruszyć mu na ratunek, ale Tetsuo nie jest już tym samym człowiekiem. Po doświadczeniach, które na nim przeprowadzono, zyskał on olbrzymią moc, która może zniszczyć całe miasto.",
+    "runtime": 124,
+    "releaseYear": 1988,
+    "genres": [
+      {
+        "name": "Anime"
+      },
+      {
+        "name": "Science-fiction"
+      }
+    ]
+  },
+  {
+    "title": "Godzilla minus one",
+    "description": "Japonia po wojnie straciła niemal wszystko. Czy wyniszczony kraj zdoła przetrwać atak Godzilli?",
+    "runtime": 125,
+    "releaseYear": 2023,
+    "genres": [
+      {
+        "name": "Akcja"
+      },
+      {
+        "name": "Dramat"
+      },
+      {
+        "name": "Przygodowy"
+      },
+      {
+        "name": "Science-fiction"
+      }
+    ]
+  },
+  {
+    "title": "Gra w opętanie",
+    "description": "Uczennice Samantha i Clara zostają same na Święta w położonym na odludziu szkolnym internacie. Wkrótce staną oko w oko z grupą fanatycznych morderców, którzy w tej zacisznej okolicy zamierzają przeprowadzić krwawy rytuał wezwania demona. Są gotowi zabić każdego, kto może im w tym przeszkodzić. Nie spodziewają się jednak, że dwie nastolatki mogą okazać się bardzo trudnymi przeciwniczkami. Czyja dusza tej nocy zostanie złożona na ołtarzu zła?",
+    "runtime": 100,
+    "releaseYear": 2023,
+    "genres": [
+      {
+        "name": "Horror"
+      }
+    ]
   }
-
 ]
