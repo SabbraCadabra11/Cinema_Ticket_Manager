@@ -14,7 +14,7 @@ public class Genre {
     @Column(name = "genre_id")
     private long id;
     private String name;
-    @ManyToMany(mappedBy = "genres")
+    @ManyToMany(mappedBy = "genres", cascade = CascadeType.ALL)
     private List<Movie> movies;
 
     public Genre() {}

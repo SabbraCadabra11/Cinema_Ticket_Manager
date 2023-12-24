@@ -15,10 +15,11 @@ public class Movie {
     @Column(name = "movie_id")
     private long id;
     private String title;
+    @Column(columnDefinition = "TEXT")
     private String description;
     private int runtime;
     private int releaseYear;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "movie_genre",
             joinColumns = @JoinColumn(name = "movie_id"),

@@ -15,7 +15,7 @@ public class Booking {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "booking_id", columnDefinition = "BINARY(16)")
+    @Column(name = "booking_id", columnDefinition = "uuid")
     private UUID id;
 
     @ManyToOne

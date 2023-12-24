@@ -34,6 +34,7 @@ public class InitializationServiceImpl implements InitializationService {
         this.movieRepository = movieRepository;
         this.showtimeRepository = showtimeRepository;
         objectMapper = new ObjectMapper();
+        objectMapper.findAndRegisterModules();
     }
 
     @Override
@@ -66,7 +67,8 @@ public class InitializationServiceImpl implements InitializationService {
         }
     }
 
-    private void setUpShowtimes() {
+    @Override
+    public void setUpShowtimes() {
         try (InputStream inputStream = getClass().getResourceAsStream("/static/showtimes.json")) {
             List<Showtime> showtimes = objectMapper.readValue(inputStream, new TypeReference<>() {});
             showtimeRepository.saveAll(showtimes);
