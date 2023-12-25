@@ -6,6 +6,6 @@
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
 </head>
 <body>
-    <h1 th:text="${message}"/>
+    <div th:include="fragments/dayNavigation" th:with="allDates=${allDates}"></div>
 </body>
 </html>

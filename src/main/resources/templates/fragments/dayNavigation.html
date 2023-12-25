@@ -1,0 +1,10 @@
+<header class="date-container">
+    <div class="date-container">
+        <div th:each="date : ${allDates}" class="showtime-box">
+            <!-- Upper row with day abbreviation -->
+            <div class="day-abbreviation" th:text="${#temporals.format(date, 'E', new java.util.Locale('pl'))}"></div>
+            <!-- Bottom row with month day number -->
+            <div class="day-number" th:text="${#temporals.format(date, 'dd')}"></div>
+        </div>
+    </div>
+</header>
