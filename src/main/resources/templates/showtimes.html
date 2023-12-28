@@ -4,8 +4,24 @@
     <meta charset="UTF-8">
     <title>Repertuar</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"
+            integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+            crossorigin="anonymous"></script>
 </head>
 <body>
-    <div th:include="fragments/dayNavigation" th:with="allDates=${allDates}"></div>
+    <div class="date-container">
+        <button th:each="date, index : ${allDates}"
+                th:class="${index == 0} ? 'active' : ''"
+                hx-get="@{'/showtimes/' + ${date}}"
+                hx-trigger="click"
+                hx-swap="outerHTML"
+                hx-target="#movie-list"
+                hx-boost="true"
+                hx-select=".date-container button">
+            <span class="day-abbreviation" th:text="${#temporals.format(date, 'E')}"></span>
+            <span class="day-number" th:text="${#temporals.format(date, 'dd.MM')}"></span>
+        </button>
+    </div>
+    <div id="movie-list" th:replace="~{fragments/movie_list}"></div>
 </body>
 </html>

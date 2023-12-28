@@ -19,6 +19,8 @@ public class Movie {
     private String description;
     private int runtime;
     private int releaseYear;
+    @Column(name = "poster_path")
+    private String poster;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "movie_genre",
@@ -28,11 +30,12 @@ public class Movie {
 
     public Movie(){}
 
-    public Movie(String title, String description, int runtime, int releaseYear, List<Genre> genres) {
+    public Movie(String title, String description, int runtime, int releaseYear, String poster, List<Genre> genres) {
         this.title = title;
         this.description = description;
         this.runtime = runtime;
         this.releaseYear = releaseYear;
+        this.poster = poster;
         this.genres = genres;
     }
 
@@ -40,8 +43,11 @@ public class Movie {
         if (genres.contains(genre)) {
             return;
         }
-
         genres.add(genre);
+    }
+
+    public String getPoster() {
+        return "resources/static/images/moviePosters/" + poster;
     }
 
     @Override
@@ -50,24 +56,15 @@ public class Movie {
         if (o == null || getClass() != o.getClass()) return false;
         Movie movie = (Movie) o;
         return runtime == movie.runtime && releaseYear == movie.releaseYear &&
-                Objects.equals(title, movie.title) && Objects.equals(description, movie.description);
+                Objects.equals(title, movie.title) &&
+                Objects.equals(description, movie.description) &&
+                Objects.equals(poster, movie.poster) &&
+                Objects.equals(genres, movie.genres);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, description, runtime, releaseYear);
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", runtime=" + runtime +
-                ", releaseYear=" + releaseYear +
-                ", genres=" + genres +
-                '}';
+        return Objects.hash(title, description, runtime, releaseYear, poster, genres);
     }
 }
 

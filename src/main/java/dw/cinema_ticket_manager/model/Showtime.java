@@ -37,4 +37,20 @@ public class Showtime {
         this.movie = movie;
         this.room = room;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Showtime showtime = (Showtime) o;
+        return Objects.equals(eventDate, showtime.eventDate) &&
+                Objects.equals(eventTime, showtime.eventTime) &&
+                Objects.equals(movie, showtime.movie) &&
+                Objects.equals(room, showtime.room);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventDate, eventTime, movie, room);
+    }
 }

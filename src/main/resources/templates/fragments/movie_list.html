@@ -1,0 +1,8 @@
+<div th:fragment="movie_list">
+    <ul>
+        <li th:each="showtime : ${showtimes}">
+            <p th:text="${showtime.movie.title}">Movie Title</p>
+            <img th:src="@{'/' + ${showtime.movie.poster}}" alt="movie poster">
+        </li>
+    </ul>
+</div>

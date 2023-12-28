@@ -78,14 +78,14 @@ public class InitializationServiceImpl implements InitializationService {
     }
 
     private List<Seat> createSeats(Room room) {
-        List<Seat> seats = new ArrayList<>();
+        var seats = new ArrayList<Seat>();
         int rows = room.getRows();
         int columns = room.getColumns();
 
         for (int r = 0; r < rows; r++) {
             char rowLetter = (char)(r + 65);
             for (int c = 1; c <= columns; c++) {
-                Seat seat = new Seat(room, String.valueOf(rowLetter + c));
+                var seat = new Seat(room, String.valueOf(rowLetter + c));
                 seats.add(seat);
             }
         }
