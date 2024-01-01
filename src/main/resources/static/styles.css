@@ -4,19 +4,23 @@ header {
 
 body {
     text-align: center;
+    color: white;
+    background-color: #183e4b;
+    font-family: "Roboto Light", sans-serif;
 }
 
-.date-container {
+ul {
+    list-style: none;
+}
+
+.mainContainer {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.dateButtons {
     justify-content: center;
     display: flex;
-}
-
-.showtime-box {
-    border: 1px solid #ccc;
-    margin: 5px;
-    padding: 10px;
-    text-align: center;
-    width: 50px;
 }
 
 .day-abbreviation {
@@ -25,4 +29,47 @@ body {
 
 .day-number {
     margin-top: 5px;
+}
+
+.btnDate {
+    margin-right: 20px;
+    margin-outside: 10px;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #2a6277;
+    color: white;
+    border-radius: 8px;
+}
+
+.btnPlaytime {
+    margin-right: 20px;
+    margin-outside: 10px;
+    background-color: #2a6277;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+.imgPoster {
+    height: 200px;
+    width: auto;
+    padding: 10px;
+    margin-top: 30px;
+}
+
+.movieListEntry {
+    border-top: white;
+    border-bottom: white;
+    display: flex;
+    text-align: center;
+}
+
+.movieDetails {
+    padding: 20px;
+    text-align: left;
+}
+
+.movieDescription {
+    text-align: justify;
 }

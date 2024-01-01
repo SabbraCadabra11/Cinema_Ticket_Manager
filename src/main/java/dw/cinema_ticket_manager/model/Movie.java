@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Getter
 @Entity
@@ -19,6 +20,7 @@ public class Movie {
     private String description;
     private int runtime;
     private int releaseYear;
+    @Getter
     @Column(name = "poster_path")
     private String poster;
     @ManyToMany(cascade = CascadeType.ALL)
@@ -46,8 +48,11 @@ public class Movie {
         genres.add(genre);
     }
 
-    public String getPoster() {
-        return "resources/static/images/moviePosters/" + poster;
+    public String getGenresAsString() {
+        return genres.stream()
+                .map(Genre::getName)
+                .sorted()
+                .collect(Collectors.joining(", ", "Gatunek filmu: ", ""));
     }
 
     @Override
