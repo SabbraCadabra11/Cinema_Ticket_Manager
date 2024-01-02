@@ -8,10 +8,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public interface ShowtimeRepository extends JpaRepository<Showtime, Long> {
     List<Showtime> findAllByEventDate(LocalDate eventDate);
     Showtime findByEventDateAndEventTime(LocalDate eventDate, LocalTime eventTime);
-    void deleteById(long id);
+    Showtime findById(UUID id);
+    void deleteById(UUID id);
 }

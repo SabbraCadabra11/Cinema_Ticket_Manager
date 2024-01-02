@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ShowtimeServiceImpl implements ShowtimeService {
@@ -27,6 +28,11 @@ public class ShowtimeServiceImpl implements ShowtimeService {
     @Override
     public List<Showtime> getAllShowtimes() {
         return showtimeRepository.findAll();
+    }
+
+    @Override
+    public Showtime getShowtimeById(UUID id) {
+        return showtimeRepository.findById(id);
     }
 
     @Override

@@ -59,8 +59,7 @@ ul {
 }
 
 .movieListEntry {
-    border-top: white;
-    border-bottom: white;
+    border-top: 1px white;
     display: flex;
     text-align: center;
 }

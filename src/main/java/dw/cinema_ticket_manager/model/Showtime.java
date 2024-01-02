@@ -3,11 +3,13 @@ package dw.cinema_ticket_manager.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,9 +17,10 @@ import java.util.Objects;
 @Table(name = "showtimes")
 public class Showtime {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "showtime_id")
-    private long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "showtime_id", columnDefinition = "uuid")
+    private UUID id;
     @Column(name = "event_date")
     private LocalDate eventDate;
     @Column(name = "event_time")
@@ -43,10 +46,7 @@ public class Showtime {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Showtime showtime = (Showtime) o;
-        return Objects.equals(eventDate, showtime.eventDate) &&
-                Objects.equals(eventTime, showtime.eventTime) &&
-                Objects.equals(movie, showtime.movie) &&
-                Objects.equals(room, showtime.room);
+        return Objects.equals(id, showtime.id);
     }
 
     @Override

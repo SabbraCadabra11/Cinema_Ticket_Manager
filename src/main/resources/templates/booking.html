@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kino XYZ - Rezerwacja</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"
+            integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="mainContainer">
+        <h1 th:text="${movieTitle}">Movie Title</h1>
+        <p th:text="'Sala: ' + ${roomNumber}">Room number</p>
+        <p th:text="'Data: ' + ${eventDate}">Event date</p>
+        <p th:text="'Godzina: ' + ${eventTime}">Event time</p>
+    </div>
+</body>
+</html>
