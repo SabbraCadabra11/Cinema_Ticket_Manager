@@ -82,10 +82,9 @@ public class InitializationServiceImpl implements InitializationService {
         int rows = room.getRows();
         int columns = room.getColumns();
 
-        for (int r = 0; r < rows; r++) {
-            char rowLetter = (char)(r + 65);
+        for (int r = 1; r <= rows; r++) {
             for (int c = 1; c <= columns; c++) {
-                var seat = new Seat(room, String.valueOf(rowLetter + c));
+                var seat = new Seat(room, r, c);
                 seats.add(seat);
             }
         }

@@ -15,20 +15,21 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seat_id")
     private long id;
-
     @ManyToOne
     @JoinColumn(name = "room_id", nullable = false)
     private Room room;
-
-    @Column(name = "seat_number")
-    private String seatNumber;
+    @Column(name = "seat_row")
+    private int row;
+    @Column(name = "seat_column")
+    private int column;
     private boolean available;
 
     public Seat() {}
 
-    public Seat(Room room, String seatNumber) {
+    public Seat(Room room, int row, int column) {
         this.room = room;
-        this.seatNumber = seatNumber;
+        this.row = row;
+        this.column = column;
         this.available = true;
     }
 
@@ -37,12 +38,16 @@ public class Seat {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Seat seat = (Seat) o;
-        return Objects.equals(room, seat.room) && Objects.equals(seatNumber, seat.seatNumber);
+        return id == seat.id &&
+                row == seat.row &&
+                column == seat.column &&
+                available == seat.available &&
+                Objects.equals(room, seat.room);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(room, seatNumber);
+        return Objects.hash(id, room, row, column, available);
     }
 
     @Override
@@ -50,7 +55,8 @@ public class Seat {
         return "Seat{" +
                 "id=" + id +
                 ", room=" + room +
-                ", seatNumber='" + seatNumber + '\'' +
+                ", row=" + row +
+                ", column=" + column +
                 ", available=" + available +
                 '}';
     }

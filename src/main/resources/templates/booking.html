@@ -14,6 +14,15 @@
         <p th:text="'Sala: ' + ${roomNumber}">Room number</p>
         <p th:text="'Data: ' + ${eventDate}">Event date</p>
         <p th:text="'Godzina: ' + ${eventTime}">Event time</p>
+        <div class="seatsLayout" id="seatsLayout">
+            <table class="seatsTable" id="seatsTable">
+                <tr th:each="row : ${seats}">
+                    <td th:each="seat : ${row}">
+                        <button class="btnSeat" th:text="${seat.getRow()} + ${seat.getColumn()}">Seat Number</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </body>
 </html>

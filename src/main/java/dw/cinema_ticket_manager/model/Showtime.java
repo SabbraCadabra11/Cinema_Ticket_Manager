@@ -31,14 +31,17 @@ public class Showtime {
     @ManyToOne
     @JoinColumn(name = "room_id", nullable = false)
     private Room room;
+    @Column(name = "base_price")
+    private int basePrice;
 
     public Showtime() {}
 
-    public Showtime(LocalDate eventDate, LocalTime eventTime, Movie movie, Room room) {
+    public Showtime(LocalDate eventDate, LocalTime eventTime, Movie movie, Room room, int basePrice) {
         this.eventDate = eventDate;
         this.eventTime = eventTime;
         this.movie = movie;
         this.room = room;
+        this.basePrice = basePrice;
     }
 
     @Override

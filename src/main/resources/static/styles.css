@@ -72,3 +72,13 @@ ul {
 .movieDescription {
     text-align: justify;
 }
+
+.btnSeat {
+    margin-bottom: 2px;
+    margin-right: 2px;
+    border: none;
+    border-radius: 1px;
+    color: white;
+    font-size: 8px;
+    background-color: yellowgreen;
+}

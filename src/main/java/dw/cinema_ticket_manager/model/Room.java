@@ -41,14 +41,7 @@ public class Room {
         this.rows = rows;
         this.columns = columns;
 
-        for (Seat seat : seats) {
-            seat.setRoom(this);
-        }
-    }
-
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
-        for (Seat seat : this.seats) {
+        for (var seat : seats) {
             seat.setRoom(this);
         }
     }
