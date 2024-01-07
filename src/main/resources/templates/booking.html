@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Kino XYZ - Rezerwacja</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/booking_styles.css}" />
     <script src="https://unpkg.com/htmx.org@1.9.10"
             integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
             crossorigin="anonymous"></script>
@@ -18,11 +18,30 @@
             <table class="seatsTable" id="seatsTable">
                 <tr th:each="row : ${seats}">
                     <td th:each="seat : ${row}">
-                        <button class="btnSeat" th:text="${seat.getRow()} + ${seat.getColumn()}">Seat Number</button>
+                        <button th:fragment="seatButtonAvailable"
+                                class="seatButton"
+                                th:id="${seat.isAvailable() ? 'btnSeatAvailable' : 'btnSeatTaken'}"
+                                th:text="${seat.getRowInRomanNumerals()} + ' ' + ${seat.getColumn()}"
+                                th:if="${seat.isAvailable()}"
+                                th:attr="hx-post=@{/booking(row=${seat.row},column=${seat.column},isSeatAvailable=false)}"
+                                hx-swap="outerHTML" hx-boost="true">Seat Number
+                        </button>
+                        <button th:fragment="seatButtonTaken"
+                                class="seatButton"
+                                th:id="${seat.isAvailable() ? 'btnSeatAvailable' : 'btnSeatTaken'}"
+                                th:text="${seat.getRowInRomanNumerals()} + ' ' + ${seat.getColumn()}"
+                                th:unless="${seat.isAvailable()}"
+                                th:attr="hx-post=@{/booking(row=${seat.row},column=${seat.column},isSeatAvailable=true)}"
+                                hx-swap="outerHTML" hx-boost="true">Seat Number
+                        </button>
                     </td>
                 </tr>
             </table>
         </div>
+        <p th:fragment="priceLabel" class="priceLabel"
+           th:text="'Suma: ' + ${totalPrice}" th:hx-get="@{/booking/updatePrice}"
+           hx-trigger="click delay:0.1s from:.seatButton" hx-swap="outerHTML">Price label
+        </p>
     </div>
 </body>
 </html>

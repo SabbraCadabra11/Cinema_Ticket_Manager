@@ -1,21 +1,26 @@
-<ul th:fragment="movie_list" class="movies">
-    <li th:each="entry : ${moviesWithShowtimes}">
-        <div class="movieListEntry" th:id="${'movieListEntry_' + entry.key.id}">
-            <img class="imgPoster" th:src="${entry.key.poster}" alt="movie poster">
-            <div class="movieDetails" th:id="${'movieDetails_' + entry.key.id}">
-                <h2 class="movieTitle" th:text="${entry.key.title}">Movie Title</h2>
-                <p class="movieDescription" th:text="${entry.key.description}">Movie Description</p>
-                <p class="movieRuntime" th:text="'Czas trwania: ' + ${entry.key.runtime} + ' minut'">Movie Runtime</p>
-                <p class="movieReleaseYear" th:text="'Premiera: ' + ${entry.key.releaseYear}">Movie Release Year</p>
-                <p class="movieGenres" th:text="${entry.key.getGenresAsString()}">Movie Genres</p>
-                <div class="playtimeButtons" th:id="playtimeButtons">
-                    <button class="btnPlaytime"
-                            th:each="showtime : ${entry.value}"
-                            th:hx-get="@{/booking(showtimeId=${showtime.id})}">
-                        <p class="btnPlaytimeCaption" th:text="${#temporals.format(showtime.eventTime, 'HH:mm')}"></p>
-                    </button>
+<div th:fragment="movie_list" class="movies_with_header">
+    <h2 class="moviesHeader" th:text="'Seanse w dniu ' + ${#temporals.format(date, 'dd.MM.yyyy')}"></h2>
+    <ul class="movies">
+        <li th:each="entry : ${moviesWithShowtimes}">
+            <div class="movieListEntry" th:id="${'movieListEntry_' + entry.key.id}">
+                <img class="imgPoster" th:src="${entry.key.poster}" alt="movie poster">
+                <div class="movieDetails" th:id="${'movieDetails_' + entry.key.id}">
+                    <h2 class="movieTitle" th:text="${entry.key.title}">Movie Title</h2>
+                    <p class="movieDescription" th:text="${entry.key.description}">Movie Description</p>
+                    <p class="movieRuntime" th:text="'Czas trwania: ' + ${entry.key.runtime} + ' minut'">Movie Runtime</p>
+                    <p class="movieReleaseYear" th:text="'Premiera: ' + ${entry.key.releaseYear}">Movie Release Year</p>
+                    <p class="movieGenres" th:text="${entry.key.getGenresAsString()}">Movie Genres</p>
+                    <div class="playtimeButtons" th:id="playtimeButtons">
+                        <p class="showtimeButtonsLabel">Seanse:</p>
+                        <button class="btnPlaytime"
+                                th:each="showtime : ${entry.value}"
+                                th:attr="booking_url=@{/booking(showtimeId=${showtime.id})}"
+                                onclick="window.location.href=this.getAttribute('booking_url')">
+                            <p class="btnPlaytimeCaption" th:text="${#temporals.format(showtime.eventTime, 'HH:mm')}"></p>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </li>
-</ul>
+        </li>
+    </ul>
+</div>

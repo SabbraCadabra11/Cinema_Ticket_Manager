@@ -30,6 +30,7 @@ public class ShowtimeController {
         var firstShowtimeDate = allDates.get(0);
         var showtimes = showtimeService.getShowtimesByDate(firstShowtimeDate);
         var moviesWithShowtimes = getMoviesWithShowtimes(showtimes);
+        model.addAttribute("date", firstShowtimeDate);
         model.addAttribute("allDates", allDates);
         model.addAttribute("moviesWithShowtimes", moviesWithShowtimes);
         return "showtimes";
@@ -40,6 +41,7 @@ public class ShowtimeController {
         validatePathVariable(date);
         var showtimes = showtimeService.getShowtimesByDate(LocalDate.parse(date));
         var moviesWithShowtimes = getMoviesWithShowtimes(showtimes);
+        model.addAttribute("date", LocalDate.parse(date));
         model.addAttribute("moviesWithShowtimes", moviesWithShowtimes);
         return "fragments/movie_list";
     }

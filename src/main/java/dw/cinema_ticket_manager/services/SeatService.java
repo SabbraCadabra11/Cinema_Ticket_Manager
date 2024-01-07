@@ -8,4 +8,5 @@ import java.util.List;
 public interface SeatService {
     Seat getSeatByRoomRowAndColumn(Room room, int row, int column);
     List<List<Seat>> getSeatsInRowsFromRoom(Room room);
+
 }

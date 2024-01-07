@@ -33,6 +33,25 @@ public class Seat {
         this.available = true;
     }
 
+    public String getRowInRomanNumerals() {
+        final int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        final String[] romanLiterals = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        final var rowInRoman = new StringBuilder();
+        int rowValue = row;
+
+        for (int i = 0; i < values.length; i++) {
+            while (rowValue >= values[i]) {
+                rowValue -= values[i];
+                rowInRoman.append(romanLiterals[i]);
+            }
+        }
+        return rowInRoman.toString();
+    }
+
+    public void setIsAvailable(boolean status) {
+        available = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,13 +60,12 @@ public class Seat {
         return id == seat.id &&
                 row == seat.row &&
                 column == seat.column &&
-                available == seat.available &&
                 Objects.equals(room, seat.room);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, room, row, column, available);
+        return Objects.hash(id, room, row, column);
     }
 
     @Override

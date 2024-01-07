@@ -1,0 +1,56 @@
+header {
+    text-align: center;
+}
+
+body {
+    text-align: center;
+    color: white;
+    background-color: #163846;
+    font-family: "Roboto Light", sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+.mainContainer {
+    margin: 0 auto;
+    width: 60%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#btnSeatAvailable {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 1px;
+    color: black;
+    font-size: 8px;
+    background-color: yellowgreen;
+}
+
+#btnSeatTaken {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 1px;
+    color: white;
+    font-size: 8px;
+    background-color: #7e2424;
+}
+
+.seatButton {
+
+}
+
+.seatsLayout {
+    justify-content: center;
+    text-align: center;
+}

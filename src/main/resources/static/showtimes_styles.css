@@ -5,7 +5,7 @@ header {
 body {
     text-align: center;
     color: white;
-    background-color: #183e4b;
+    background-color: #163846;
     font-family: "Roboto Light", sans-serif;
 }
 
@@ -19,6 +19,7 @@ ul {
 }
 
 .dateButtons {
+    margin: 30px;
     justify-content: center;
     display: flex;
 }
@@ -28,27 +29,32 @@ ul {
 }
 
 .day-number {
-    margin-top: 5px;
+    margin-top: 2px;
 }
 
 .btnDate {
     margin-right: 20px;
-    margin-outside: 10px;
     border: none;
-    padding: 10px;
+    padding: 8px;
     font-size: 16px;
     background-color: #2a6277;
     color: white;
     border-radius: 8px;
+    transition: background-color 150ms;
 }
 
 .btnPlaytime {
-    margin-right: 20px;
+    margin-left: 20px;
     margin-outside: 10px;
     background-color: #2a6277;
     color: white;
     border-radius: 5px;
     border: none;
+    transition: background-color 150ms;
+}
+
+.btnDate:hover, .btnPlaytime:hover {
+    background-color: #38869f;
 }
 
 .imgPoster {
@@ -81,4 +87,8 @@ ul {
     color: white;
     font-size: 8px;
     background-color: yellowgreen;
+}
+
+#playtimeButtons {
+    display: flex;
 }

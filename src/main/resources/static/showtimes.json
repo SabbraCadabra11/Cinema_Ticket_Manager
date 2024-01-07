@@ -45,17 +45,6 @@
   },
   {
     "eventDate": "2023-12-28",
-    "eventTime": "17:45:00",
-    "movie": {
-      "id": 4
-    },
-    "room": {
-      "id": 1
-    },
-    "basePrice": 30
-  },
-  {
-    "eventDate": "2023-12-28",
     "eventTime": "20:30:00",
     "movie": {
       "id": 6
@@ -75,17 +64,6 @@
       "id": 1
     },
     "basePrice": 30
-  },
-  {
-    "eventDate": "2023-12-29",
-    "eventTime": "17:00:00",
-    "movie": {
-      "id": 3
-    },
-    "room": {
-      "id": 2
-    },
-    "basePrice": 25
   },
   {
     "eventDate": "2023-12-29",
@@ -207,16 +185,5 @@
       "id": 2
     },
     "basePrice": 30
-  },
-  {
-    "eventDate": "2023-12-29",
-    "eventTime": "19:00:00",
-    "movie": {
-      "id": 3
-    },
-    "room": {
-      "id": 1
-    },
-    "basePrice": 25
   }
 ]
