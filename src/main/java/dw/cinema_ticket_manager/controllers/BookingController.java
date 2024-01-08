@@ -44,7 +44,7 @@ public class BookingController {
     public String renderBookingPage(@RequestParam(name = "showtimeId") String showtimeId, Model model) {
         showtime = showtimeService.getShowtimeById(UUID.fromString(showtimeId));
         room = showtime.getRoom();
-        model.addAttribute("movieTitle", showtime.getMovie().getTitle());
+        model.addAttribute("movie", showtime.getMovie());
         model.addAttribute("roomNumber", showtime.getRoom().getRoomNumber());
         model.addAttribute("eventDate", showtime.getEventDate().toString());
         model.addAttribute("eventTime", showtime.getEventTime().toString());

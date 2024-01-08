@@ -41,18 +41,11 @@ public class Movie {
         this.genres = genres;
     }
 
-    public void addGenre(Genre genre) {
-        if (genres.contains(genre)) {
-            return;
-        }
-        genres.add(genre);
-    }
-
     public String getGenresAsString() {
         return genres.stream()
                 .map(Genre::getName)
                 .sorted()
-                .collect(Collectors.joining(", ", "Gatunek filmu: ", ""));
+                .collect(Collectors.joining(", "));
     }
 
     @Override

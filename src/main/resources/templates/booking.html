@@ -10,10 +10,13 @@
 </head>
 <body>
     <div class="mainContainer">
-        <h1 th:text="${movieTitle}">Movie Title</h1>
-        <p th:text="'Sala: ' + ${roomNumber}">Room number</p>
-        <p th:text="'Data: ' + ${eventDate}">Event date</p>
-        <p th:text="'Godzina: ' + ${eventTime}">Event time</p>
+        <div class="movieDetailsDiv" id="movieDetailsDiv">
+            <img class="posterImg" th:src="${movie.poster}" th:alt="${movie.title} + ' poster'">
+            <h3 th:text="${movie.title}">Movie Title</h3>
+            <p th:text="'Sala: ' + ${roomNumber}">Room number</p>
+            <p th:text="'Data: ' + ${eventDate}">Event date</p>
+            <p th:text="'Godzina: ' + ${eventTime}">Event time</p>
+        </div>
         <div class="seatsLayout" id="seatsLayout">
             <table class="seatsTable" id="seatsTable">
                 <tr th:each="row : ${seats}">

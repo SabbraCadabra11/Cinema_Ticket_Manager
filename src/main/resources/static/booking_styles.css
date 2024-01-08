@@ -15,10 +15,10 @@ ul {
 
 .mainContainer {
     margin: 0 auto;
-    width: 60%;
+    width: 80%;
     text-align: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
 }
 
@@ -53,4 +53,12 @@ ul {
 .seatsLayout {
     justify-content: center;
     text-align: center;
+    margin: 30px;
+}
+
+.posterImg {
+    height: 200px;
+    width: auto;
+    padding: 10px;
+    margin-top: 30px;
 }
