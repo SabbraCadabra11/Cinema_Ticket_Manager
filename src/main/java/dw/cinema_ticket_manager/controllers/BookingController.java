@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -46,7 +47,7 @@ public class BookingController {
         room = showtime.getRoom();
         model.addAttribute("movie", showtime.getMovie());
         model.addAttribute("roomNumber", showtime.getRoom().getRoomNumber());
-        model.addAttribute("eventDate", showtime.getEventDate().toString());
+        model.addAttribute("eventDate", getFormattedDate(showtime.getEventDate()));
         model.addAttribute("eventTime", showtime.getEventTime().toString());
         model.addAttribute("seats", seatService.getSeatsInRowsFromRoom(room));
         return "booking";
@@ -79,7 +80,25 @@ public class BookingController {
     public String updatePriceLabel(Model model) {
         int totalPrice = showtime.getBasePrice() * chosenSeats.size();
         model.addAttribute("totalPrice", totalPrice);
-        return "booking :: priceLabel";
+        return "booking :: updatedPriceLabel";
+    }
+
+    private String getFormattedDate(LocalDate date) {
+        return switch (date.getMonthValue()) {
+            case 1 -> "%d %s %d".formatted(date.getDayOfMonth(), "sty. ", date.getYear());
+            case 2 -> "%d %s %d".formatted(date.getDayOfMonth(), "lut. ", date.getYear());
+            case 3 -> "%d %s %d".formatted(date.getDayOfMonth(), "mar. ", date.getYear());
+            case 4 -> "%d %s %d".formatted(date.getDayOfMonth(), "kwi. ", date.getYear());
+            case 5 -> "%d %s %d".formatted(date.getDayOfMonth(), "maja ", date.getYear());
+            case 6 -> "%d %s %d".formatted(date.getDayOfMonth(), "cze. ", date.getYear());
+            case 7 -> "%d %s %d".formatted(date.getDayOfMonth(), "lip. ", date.getYear());
+            case 8 -> "%d %s %d".formatted(date.getDayOfMonth(), "sie. ", date.getYear());
+            case 9 -> "%d %s %d".formatted(date.getDayOfMonth(), "wrz. ", date.getYear());
+            case 10 -> "%d %s %d".formatted(date.getDayOfMonth(), "paź. ", date.getYear());
+            case 11 -> "%d %s %d".formatted(date.getDayOfMonth(), "lis. ", date.getYear());
+            case 12 -> "%d %s %d".formatted(date.getDayOfMonth(), "gru. ", date.getYear());
+            default -> "";
+        };
     }
 
 }

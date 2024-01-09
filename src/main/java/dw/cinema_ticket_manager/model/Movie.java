@@ -23,6 +23,8 @@ public class Movie {
     @Getter
     @Column(name = "poster_path")
     private String poster;
+    @Column(name = "trailer_path")
+    private String trailer;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "movie_genre",
@@ -32,12 +34,13 @@ public class Movie {
 
     public Movie(){}
 
-    public Movie(String title, String description, int runtime, int releaseYear, String poster, List<Genre> genres) {
+    public Movie(String title, String description, int runtime, int releaseYear, String poster, String trailer, List<Genre> genres) {
         this.title = title;
         this.description = description;
         this.runtime = runtime;
         this.releaseYear = releaseYear;
         this.poster = poster;
+        this.trailer = trailer;
         this.genres = genres;
     }
 

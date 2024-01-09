@@ -13,38 +13,49 @@
         <div class="movieDetailsDiv" id="movieDetailsDiv">
             <img class="posterImg" th:src="${movie.poster}" th:alt="${movie.title} + ' poster'">
             <h3 th:text="${movie.title}">Movie Title</h3>
-            <p th:text="'Sala: ' + ${roomNumber}">Room number</p>
-            <p th:text="'Data: ' + ${eventDate}">Event date</p>
-            <p th:text="'Godzina: ' + ${eventTime}">Event time</p>
+            <p th:text="'Sala ' + ${roomNumber}">Room number</p>
+            <p th:text="${eventDate} + ', ' + ${eventTime}">Event date</p>
         </div>
-        <div class="seatsLayout" id="seatsLayout">
-            <table class="seatsTable" id="seatsTable">
-                <tr th:each="row : ${seats}">
-                    <td th:each="seat : ${row}">
-                        <button th:fragment="seatButtonAvailable"
-                                class="seatButton"
-                                th:id="${seat.isAvailable() ? 'btnSeatAvailable' : 'btnSeatTaken'}"
-                                th:text="${seat.getRowInRomanNumerals()} + ' ' + ${seat.getColumn()}"
-                                th:if="${seat.isAvailable()}"
-                                th:attr="hx-post=@{/booking(row=${seat.row},column=${seat.column},isSeatAvailable=false)}"
-                                hx-swap="outerHTML" hx-boost="true">Seat Number
-                        </button>
-                        <button th:fragment="seatButtonTaken"
-                                class="seatButton"
-                                th:id="${seat.isAvailable() ? 'btnSeatAvailable' : 'btnSeatTaken'}"
-                                th:text="${seat.getRowInRomanNumerals()} + ' ' + ${seat.getColumn()}"
-                                th:unless="${seat.isAvailable()}"
-                                th:attr="hx-post=@{/booking(row=${seat.row},column=${seat.column},isSeatAvailable=true)}"
-                                hx-swap="outerHTML" hx-boost="true">Seat Number
-                        </button>
-                    </td>
-                </tr>
-            </table>
+        <div class="roomLayout" id="roomLayout">
+            <iframe width="300" height="180" th:src="${movie.trailer} + '?controls=0&autoplay=1&mute=1'" title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div class="seatsLayout" id="seatsLayout">
+                <table class="seatsTable" id="seatsTable">
+                    <tr th:each="row : ${seats}">
+                        <td th:each="seat : ${row}">
+                            <button th:fragment="seatButtonAvailable"
+                                    class="seatButton"
+                                    th:id="${seat.isAvailable() ? 'btnSeatAvailable' : 'btnSeatTaken'}"
+                                    th:text="${seat.getRowInRomanNumerals()} + ' ' + ${seat.getColumn()}"
+                                    th:if="${seat.isAvailable()}"
+                                    th:attr="hx-post=@{/booking(row=${seat.row},column=${seat.column},isSeatAvailable=false)}"
+                                    hx-swap="outerHTML" hx-boost="true">Seat Number
+                            </button>
+                            <button th:fragment="seatButtonTaken"
+                                    class="seatButton"
+                                    th:id="${seat.isAvailable() ? 'btnSeatAvailable' : 'btnSeatTaken'}"
+                                    th:text="${seat.getRowInRomanNumerals()} + ' ' + ${seat.getColumn()}"
+                                    th:unless="${seat.isAvailable()}"
+                                    th:attr="hx-post=@{/booking(row=${seat.row},column=${seat.column},isSeatAvailable=true)}"
+                                    hx-swap="outerHTML" hx-boost="true">Seat Number
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <p th:fragment="priceLabel" class="priceLabel"
-           th:text="'Suma: ' + ${totalPrice}" th:hx-get="@{/booking/updatePrice}"
-           hx-trigger="click delay:0.1s from:.seatButton" hx-swap="outerHTML">Price label
-        </p>
+        <div class="bookingDetailsDiv" id="bookingDetailsDiv">
+            <p th:fragment="initialPriceLabel" class="priceLabel"
+               th:if="${totalPrice} == null"
+               th:text="'Do zapłaty: 0 zł'" th:hx-get="@{/booking/updatePrice}"
+               hx-trigger="click delay:0.1s from:.seatButton" hx-swap="outerHTML" hx-boost="true">Price label
+            </p>
+            <p th:fragment="updatedPriceLabel" class="priceLabel"
+               th:unless="${totalPrice} == null"
+               th:text="'Do zapłaty: ' + ${totalPrice} + ' zł'" th:hx-get="@{/booking/updatePrice}"
+               hx-trigger="click delay:0.1s from:.seatButton" hx-swap="outerHTML" hx-boost="true">Price label
+            </p>
+        </div>
     </div>
 </body>
 </html>

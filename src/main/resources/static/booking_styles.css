@@ -3,10 +3,11 @@ header {
 }
 
 body {
-    text-align: center;
+    margin-top: 100px;
     color: white;
     background-color: #163846;
     font-family: "Roboto Light", sans-serif;
+    justify-content: center;
 }
 
 ul {
@@ -16,44 +17,48 @@ ul {
 .mainContainer {
     margin: 0 auto;
     width: 80%;
-    text-align: center;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    justify-content: center;
 }
 
 #btnSeatAvailable {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     margin-bottom: 5px;
     margin-right: 5px;
     border: none;
     border-radius: 1px;
     color: black;
-    font-size: 8px;
+    font-size: 10px;
     background-color: yellowgreen;
 }
 
 #btnSeatTaken {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     margin-bottom: 5px;
     margin-right: 5px;
     border: none;
     border-radius: 1px;
     color: white;
-    font-size: 8px;
+    font-size: 10px;
     background-color: #7e2424;
 }
 
-.seatButton {
+.seatButton {}
 
+.roomLayout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 70px;
 }
 
 .seatsLayout {
-    justify-content: center;
-    text-align: center;
-    margin: 30px;
+    margin-top: 40px;
 }
 
 .posterImg {

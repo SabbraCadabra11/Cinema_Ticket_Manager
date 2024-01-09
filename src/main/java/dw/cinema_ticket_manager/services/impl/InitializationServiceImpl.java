@@ -47,8 +47,8 @@ public class InitializationServiceImpl implements InitializationService {
 
     @Override
     public void setUpRooms() {
-        var room1 = new Room(1, 10, 10);
-        var room2 = new Room(2, 10, 10);
+        var room1 = new Room(1, 10, 15);
+        var room2 = new Room(2, 7, 12);
         var seats1 = createSeats(room1);
         var seats2 = createSeats(room2);
 
