@@ -1,8 +1,6 @@
 package dw.cinema_ticket_manager.controllers;
 
-import dw.cinema_ticket_manager.model.Room;
-import dw.cinema_ticket_manager.model.Seat;
-import dw.cinema_ticket_manager.model.Showtime;
+import dw.cinema_ticket_manager.model.*;
 import dw.cinema_ticket_manager.services.impl.BookingServiceImpl;
 import dw.cinema_ticket_manager.services.impl.SeatServiceImpl;
 import dw.cinema_ticket_manager.services.impl.ShowtimeServiceImpl;
@@ -25,9 +23,9 @@ public class BookingController {
     private final ShowtimeServiceImpl showtimeService;
     private final BookingServiceImpl bookingService;
     private final SeatServiceImpl seatService;
+    private final List<Seat> chosenSeats;
     private Showtime showtime;
     private Room room;
-    private final List<Seat> chosenSeats;
 
     @Autowired
     public BookingController(ShowtimeServiceImpl showtimeService,
@@ -43,6 +41,7 @@ public class BookingController {
 
     @GetMapping(params = "showtimeId")
     public String renderBookingPage(@RequestParam(name = "showtimeId") String showtimeId, Model model) {
+        chosenSeats.clear();
         showtime = showtimeService.getShowtimeById(UUID.fromString(showtimeId));
         room = showtime.getRoom();
         model.addAttribute("movie", showtime.getMovie());
@@ -50,14 +49,15 @@ public class BookingController {
         model.addAttribute("eventDate", getFormattedDate(showtime.getEventDate()));
         model.addAttribute("eventTime", showtime.getEventTime().toString());
         model.addAttribute("seats", seatService.getSeatsInRowsFromRoom(room));
+        model.addAttribute("chosenSeats", chosenSeats);
         return "booking";
     }
 
-    @PostMapping(params = {"row", "column", "isSeatAvailable"})
-    public String changeSeatStatus(@RequestParam(name = "row") int seatRow,
-                                   @RequestParam(name = "column") int seatColumn,
-                                   @RequestParam(name = "isSeatAvailable") String status,
-                                   Model model) {
+    @PostMapping(params = {"row", "column", "chosen"})
+    public String handleSeatClick(@RequestParam(name = "row") int seatRow,
+                                  @RequestParam(name = "column") int seatColumn,
+                                  @RequestParam(name = "chosen") String chosen,
+                                  Model model) {
 
         if (seatRow < 1 || seatRow > room.getRows() || seatColumn < 1 || seatColumn > room.getColumns()) {
             //TODO: handle this properly
@@ -65,15 +65,16 @@ public class BookingController {
         }
 
         var seat = seatService.getSeatByRoomRowAndColumn(room, seatRow, seatColumn);
-        seat.setIsAvailable(Boolean.parseBoolean(status));
-        if (seat.isAvailable()) {
-            chosenSeats.remove(seat);
-        } else {
+        if (chosen.equals("true")) {
             chosenSeats.add(seat);
+            seat.setStatus(SeatStatus.RESERVED);
+        } else {
+            chosenSeats.remove(seat);
+            seat.setStatus(SeatStatus.AVAILABLE);
         }
-        System.out.println(chosenSeats.size());
         model.addAttribute("seat", seat);
-        return seat.isAvailable() ? "booking :: seatButtonAvailable" : "booking :: seatButtonTaken";
+        return seat.getStatus() == SeatStatus.AVAILABLE
+                ? "booking :: seatButtonAvailable" : "booking :: seatButtonChosen";
     }
 
     @GetMapping("/updatePrice")
@@ -81,6 +82,26 @@ public class BookingController {
         int totalPrice = showtime.getBasePrice() * chosenSeats.size();
         model.addAttribute("totalPrice", totalPrice);
         return "booking :: updatedPriceLabel";
+    }
+
+    @GetMapping("/updateSeatsList")
+    public String updateChosenSeatsList(Model model) {
+        model.addAttribute("chosenSeats", chosenSeats);
+        model.addAttribute("seatPrice", showtime.getBasePrice());
+        return "booking :: chosenSeatsDetails";
+    }
+
+    @GetMapping("/purchase")
+    public String redirectToPurchased(Model model) {
+        if (chosenSeats.isEmpty()) {
+            //TODO: handle this properly
+        }
+
+        var booking = new Booking(showtime, chosenSeats);
+        seatService.updateAll(chosenSeats);
+        bookingService.save(booking);
+        model.addAttribute("booking", booking);
+        return "checkout";
     }
 
     private String getFormattedDate(LocalDate date) {

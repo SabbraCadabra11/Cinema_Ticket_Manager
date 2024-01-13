@@ -22,7 +22,9 @@ public class Seat {
     private int row;
     @Column(name = "seat_column")
     private int column;
-    private boolean available;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "seat_status")
+    private SeatStatus status;
 
     public Seat() {}
 
@@ -30,7 +32,7 @@ public class Seat {
         this.room = room;
         this.row = row;
         this.column = column;
-        this.available = true;
+        this.status = SeatStatus.AVAILABLE;
     }
 
     public String getRowInRomanNumerals() {
@@ -46,10 +48,6 @@ public class Seat {
             }
         }
         return rowInRoman.toString();
-    }
-
-    public void setIsAvailable(boolean status) {
-        available = status;
     }
 
     @Override
@@ -75,7 +73,7 @@ public class Seat {
                 ", room=" + room +
                 ", row=" + row +
                 ", column=" + column +
-                ", available=" + available +
+                ", status=" + status +
                 '}';
     }
 }

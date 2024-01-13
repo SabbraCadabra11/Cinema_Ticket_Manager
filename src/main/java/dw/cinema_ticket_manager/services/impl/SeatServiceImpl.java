@@ -2,6 +2,7 @@ package dw.cinema_ticket_manager.services.impl;
 
 import dw.cinema_ticket_manager.model.Room;
 import dw.cinema_ticket_manager.model.Seat;
+import dw.cinema_ticket_manager.model.SeatStatus;
 import dw.cinema_ticket_manager.repositories.SeatRepository;
 import dw.cinema_ticket_manager.services.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,11 @@ public class SeatServiceImpl implements SeatService {
             allRows.add(rowOfSeats);
         }
         return allRows;
+    }
+
+    @Override
+    public void updateAll(List<Seat> seats) {
+        seats.forEach(seat -> seat.setStatus(SeatStatus.OCCUPIED));
+        seatRepository.saveAll(seats);
     }
 }

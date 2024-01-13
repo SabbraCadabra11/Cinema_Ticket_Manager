@@ -1,0 +1,25 @@
+header {
+    text-align: center;
+}
+
+body {
+    text-align: center;
+    color: white;
+    background-color: #163846;
+    font-family: "Roboto Light", sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+.homeButton {
+    margin-right: 20px;
+    border: none;
+    padding: 8px;
+    font-size: 16px;
+    background-color: #2a6277;
+    color: white;
+    border-radius: 8px;
+    transition: background-color 150ms;
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Kino XYZ - Rezerwacja</title>
@@ -24,20 +24,22 @@
                     <tr th:each="row : ${seats}">
                         <td th:each="seat : ${row}">
                             <button th:fragment="seatButtonAvailable"
-                                    class="seatButton"
-                                    th:id="${seat.isAvailable() ? 'btnSeatAvailable' : 'btnSeatTaken'}"
+                                    th:if="${seat.getStatus() == T(dw.cinema_ticket_manager.model.SeatStatus).AVAILABLE}"
+                                    class="seatButton" id="btnSeatAvailable"
                                     th:text="${seat.getRowInRomanNumerals()} + ' ' + ${seat.getColumn()}"
-                                    th:if="${seat.isAvailable()}"
-                                    th:attr="hx-post=@{/booking(row=${seat.row},column=${seat.column},isSeatAvailable=false)}"
+                                    th:attr="hx-post=@{/booking(row=${seat.row},column=${seat.column},chosen='true')}"
                                     hx-swap="outerHTML" hx-boost="true">Seat Number
                             </button>
-                            <button th:fragment="seatButtonTaken"
-                                    class="seatButton"
-                                    th:id="${seat.isAvailable() ? 'btnSeatAvailable' : 'btnSeatTaken'}"
+                            <button th:fragment="seatButtonChosen"
+                                    th:if="${seat.getStatus() == T(dw.cinema_ticket_manager.model.SeatStatus).RESERVED}"
+                                    class="seatButton" id="btnSeatChosen"
                                     th:text="${seat.getRowInRomanNumerals()} + ' ' + ${seat.getColumn()}"
-                                    th:unless="${seat.isAvailable()}"
-                                    th:attr="hx-post=@{/booking(row=${seat.row},column=${seat.column},isSeatAvailable=true)}"
+                                    th:attr="hx-post=@{/booking(row=${seat.row},column=${seat.column},chosen='false')}"
                                     hx-swap="outerHTML" hx-boost="true">Seat Number
+                            </button>
+                            <button th:if="${seat.getStatus() == T(dw.cinema_ticket_manager.model.SeatStatus).OCCUPIED}"
+                                    class="seatButton" id="btnSeatOccupied"
+                                    th:text="${seat.getRowInRomanNumerals()} + ' ' + ${seat.getColumn()}">Seat Number
                             </button>
                         </td>
                     </tr>
@@ -46,15 +48,31 @@
         </div>
         <div class="bookingDetailsDiv" id="bookingDetailsDiv">
             <p th:fragment="initialPriceLabel" class="priceLabel"
-               th:if="${totalPrice} == null"
-               th:text="'Do zapłaty: 0 zł'" th:hx-get="@{/booking/updatePrice}"
-               hx-trigger="click delay:0.1s from:.seatButton" hx-swap="outerHTML" hx-boost="true">Price label
+               th:if="${totalPrice} == null" th:text="'Do zapłaty: 0 zł'"
+               th:hx-get="@{/booking/updatePrice}" hx-trigger="click delay:0.1s from:.seatButton"
+               hx-swap="outerHTML" hx-boost="true">Price label
             </p>
             <p th:fragment="updatedPriceLabel" class="priceLabel"
-               th:unless="${totalPrice} == null"
-               th:text="'Do zapłaty: ' + ${totalPrice} + ' zł'" th:hx-get="@{/booking/updatePrice}"
-               hx-trigger="click delay:0.1s from:.seatButton" hx-swap="outerHTML" hx-boost="true">Price label
+               th:unless="${totalPrice} == null" th:text="'Do zapłaty: ' + ${totalPrice} + ' zł'"
+               th:hx-get="@{/booking/updatePrice}" hx-trigger="click delay:0.1s from:.seatButton"
+               hx-swap="outerHTML" hx-boost="true">Price label
             </p>
+            <div th:fragment="chosenSeatsDetails" class="chosenSeatsDetailsDiv" id="chosenSeatsDetailsDiv"
+                 th:hx-get="@{/booking/updateSeatsList}" hx-trigger="click delay:0.1s from:.seatButton"
+                 hx-swap="outerHTML" hx-boost="true">
+                <table class="chosenSeatsTable" id="chosenSeatsTable">
+                    <tr class="chosenSeatsRow" th:each="chosenSeat : ${chosenSeats}">
+                        <td class="chosenSeatDetails"
+                            th:text="'Rząd: ' + ${chosenSeat.getRow()} + ', kolumna: ' + ${chosenSeat.getColumn()}">Chosen seat details</td>
+                        <td class="chosenSeatPrice" th:text="${seatPrice} + ' zł'">Seat price</td>
+                    </tr>
+                </table>
+            </div>
+            <button class="purchaseButton" id="purchaseButton"
+                    th:attr="purchase_url=@{/booking/purchase}"
+                    onclick="window.location.href=this.getAttribute('purchase_url')">
+                <p class="purchaseBtnLabel">Kup teraz</p>
+            </button>
         </div>
     </div>
 </body>
