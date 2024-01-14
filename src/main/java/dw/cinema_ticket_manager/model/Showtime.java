@@ -28,19 +28,20 @@ public class Showtime {
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "room_id", nullable = false)
     private Room room;
     @Column(name = "base_price")
     private int basePrice;
+    private int roomNumber;
 
     public Showtime() {}
 
-    public Showtime(LocalDate eventDate, LocalTime eventTime, Movie movie, Room room, int basePrice) {
+    public Showtime(LocalDate eventDate, LocalTime eventTime, Movie movie, int roomNumber, int basePrice) {
         this.eventDate = eventDate;
         this.eventTime = eventTime;
         this.movie = movie;
-        this.room = room;
+        this.roomNumber = roomNumber;
         this.basePrice = basePrice;
     }
 

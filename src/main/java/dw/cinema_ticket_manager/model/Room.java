@@ -17,8 +17,8 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "room_id")
     private long id;
-    @OneToMany(mappedBy = "room")
-    private List<Showtime> showtimes;
+    @OneToOne(mappedBy = "room")
+    private Showtime showtime;
     @OneToMany(mappedBy = "room")
     private List<Seat> seats;
     @Column(name = "room_number")
@@ -35,7 +35,6 @@ public class Room {
     }
 
     public Room(List<Seat> seats, int roomNumber, int rows, int columns) {
-        this.showtimes = new ArrayList<>();
         this.seats = seats;
         this.roomNumber = roomNumber;
         this.rows = rows;
@@ -63,7 +62,6 @@ public class Room {
     public String toString() {
         return "Room{" +
                 "id=" + id +
-                ", showtimes=" + showtimes +
                 ", roomNumber=" + roomNumber +
                 '}';
     }

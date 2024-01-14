@@ -2,10 +2,7 @@ package dw.cinema_ticket_manager.services.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dw.cinema_ticket_manager.model.Movie;
-import dw.cinema_ticket_manager.model.Room;
-import dw.cinema_ticket_manager.model.Seat;
-import dw.cinema_ticket_manager.model.Showtime;
+import dw.cinema_ticket_manager.model.*;
 import dw.cinema_ticket_manager.repositories.MovieRepository;
 import dw.cinema_ticket_manager.repositories.RoomRepository;
 import dw.cinema_ticket_manager.repositories.SeatRepository;
@@ -39,22 +36,8 @@ public class InitializationServiceImpl implements InitializationService {
 
     @Override
     public void initialize() {
-        setUpRooms();
         setUpMovies();
         setUpShowtimes();
-    }
-
-
-    @Override
-    public void setUpRooms() {
-        var room1 = new Room(1, 10, 15);
-        var room2 = new Room(2, 7, 12);
-        var seats1 = createSeats(room1);
-        var seats2 = createSeats(room2);
-
-        roomRepository.saveAll(List.of(room1, room2));
-        seatRepository.saveAll(seats1);
-        seatRepository.saveAll(seats2);
     }
 
     @Override
@@ -71,24 +54,17 @@ public class InitializationServiceImpl implements InitializationService {
     public void setUpShowtimes() {
         try (InputStream inputStream = getClass().getResourceAsStream("/static/showtimes.json")) {
             List<Showtime> showtimes = objectMapper.readValue(inputStream, new TypeReference<>() {});
+            var roomFactory = new RoomFactory();
+            for (var showtime : showtimes) {
+                var room = roomFactory.getRoomCopy(showtime.getRoomNumber());
+                roomRepository.save(room);
+                seatRepository.saveAll(room.getSeats());
+                showtime.setRoom(room);
+            }
             showtimeRepository.saveAll(showtimes);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private List<Seat> createSeats(Room room) {
-        var seats = new ArrayList<Seat>();
-        int rows = room.getRows();
-        int columns = room.getColumns();
-
-        for (int r = 1; r <= rows; r++) {
-            for (int c = 1; c <= columns; c++) {
-                var seat = new Seat(room, r, c);
-                seats.add(seat);
-            }
-        }
-        return seats;
     }
 }
 

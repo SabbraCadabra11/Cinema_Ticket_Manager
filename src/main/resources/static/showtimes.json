@@ -5,9 +5,7 @@
     "movie": {
       "id": 1
     },
-    "room": {
-      "id": 1
-    },
+    "roomNumber": 1,
     "basePrice": 30
   },
   {
@@ -16,9 +14,7 @@
     "movie": {
       "id": 3
     },
-    "room": {
-      "id": 2
-    },
+    "roomNumber": 2,
     "basePrice": 25
   },
   {
@@ -27,9 +23,7 @@
     "movie": {
       "id": 5
     },
-    "room": {
-      "id": 1
-    },
+    "roomNumber": 1,
     "basePrice": 30
   },
   {
@@ -38,9 +32,7 @@
     "movie": {
       "id": 2
     },
-    "room": {
-      "id": 2
-    },
+    "roomNumber": 2,
     "basePrice": 25
   },
   {
@@ -49,9 +41,7 @@
     "movie": {
       "id": 6
     },
-    "room": {
-      "id": 2
-    },
+    "roomNumber": 2,
     "basePrice": 25
   },
   {
@@ -60,9 +50,7 @@
     "movie": {
       "id": 1
     },
-    "room": {
-      "id": 1
-    },
+    "roomNumber": 1,
     "basePrice": 30
   },
   {
@@ -71,9 +59,7 @@
     "movie": {
       "id": 5
     },
-    "room": {
-      "id": 1
-    },
+    "roomNumber": 1,
     "basePrice": 30
   },
   {
@@ -82,9 +68,7 @@
     "movie": {
       "id": 2
     },
-    "room": {
-      "id": 1
-    },
+    "roomNumber": 1,
     "basePrice": 25
   },
   {
@@ -93,9 +77,7 @@
     "movie": {
       "id": 4
     },
-    "room": {
-      "id": 2
-    },
+    "roomNumber": 2,
     "basePrice": 30
   },
   {
@@ -104,9 +86,7 @@
     "movie": {
       "id": 6
     },
-    "room": {
-      "id": 1
-    },
+    "roomNumber": 1,
     "basePrice": 25
   },
   {
@@ -115,9 +95,7 @@
     "movie": {
       "id": 1
     },
-    "room": {
-      "id": 2
-    },
+    "roomNumber": 2,
     "basePrice": 30
   },
   {
@@ -126,9 +104,7 @@
     "movie": {
       "id": 3
     },
-    "room": {
-      "id": 1
-    },
+    "roomNumber": 1,
     "basePrice": 25
   },
   {
@@ -137,9 +113,7 @@
     "movie": {
       "id": 5
     },
-    "room": {
-      "id": 2
-    },
+    "roomNumber": 2,
     "basePrice": 30
   },
   {
@@ -148,9 +122,7 @@
     "movie": {
       "id": 2
     },
-    "room": {
-      "id": 1
-    },
+    "roomNumber": 1,
     "basePrice": 25
   },
   {
@@ -159,9 +131,7 @@
     "movie": {
       "id": 4
     },
-    "room": {
-      "id": 2
-    },
+    "roomNumber": 2,
     "basePrice": 30
   },
   {
@@ -170,9 +140,7 @@
     "movie": {
       "id": 6
     },
-    "room": {
-      "id": 1
-    },
+    "roomNumber": 1,
     "basePrice": 25
   },
   {
@@ -181,9 +149,7 @@
     "movie": {
       "id": 1
     },
-    "room": {
-      "id": 2
-    },
+    "roomNumber": 2,
     "basePrice": 30
   }
 ]
