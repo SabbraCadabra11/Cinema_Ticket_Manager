@@ -1,5 +1,6 @@
 package dw.cinema_ticket_manager.controllers;
 
+import com.google.zxing.WriterException;
 import dw.cinema_ticket_manager.model.*;
 import dw.cinema_ticket_manager.services.impl.BookingServiceImpl;
 import dw.cinema_ticket_manager.services.impl.SeatServiceImpl;
@@ -12,10 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequestMapping("/booking")
@@ -92,7 +92,7 @@ public class BookingController {
     }
 
     @GetMapping("/purchase")
-    public String redirectToPurchased(Model model) {
+    public String redirectToPurchased(Model model) throws IOException, WriterException {
         if (chosenSeats.isEmpty()) {
             //TODO: handle this properly
         }
@@ -100,9 +100,12 @@ public class BookingController {
         var booking = new Booking(showtime, chosenSeats);
         seatService.updateAll(chosenSeats);
         bookingService.save(booking);
+        var base64QRCode = bookingService.generateQRCodeBase64(booking.getId().toString(), 200, 200);
         model.addAttribute("booking", booking);
+        model.addAttribute("base64QRCode", base64QRCode);
         return "checkout";
     }
+
 
     private String getFormattedDate(LocalDate date) {
         return switch (date.getMonthValue()) {

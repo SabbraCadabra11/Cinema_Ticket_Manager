@@ -10,6 +10,8 @@
 </head>
 <body>
     <div class="bookingDetailsDiv" id="bookingDetailsDiv">
+
+        <img th:src="${'data:image/png;base64,' + base64QRCode}" alt="QR Code">
         <p class="bookingId" id="bookingId" th:text="${booking.id}">Booking ID</p>
     </div>
     <button class="homeButton" id="homeButton"

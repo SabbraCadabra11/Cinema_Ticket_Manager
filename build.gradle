@@ -31,6 +31,8 @@ dependencies {
 	implementation group: 'io.github.wimdeblauwe', name: 'htmx-spring-boot-thymeleaf', version: '3.2.0'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation group: 'com.google.zxing', name: 'core', version: '3.5.2'
+	implementation 'com.google.zxing:javase:3.3.0'
 	//runtimeOnly 'org.postgresql:postgresql'
 	runtimeOnly 'com.h2database:h2:2.2.224'
 	annotationProcessor 'org.projectlombok:lombok'
