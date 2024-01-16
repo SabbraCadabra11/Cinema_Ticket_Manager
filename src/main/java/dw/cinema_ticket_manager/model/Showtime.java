@@ -6,8 +6,9 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -43,6 +44,29 @@ public class Showtime {
         this.movie = movie;
         this.roomNumber = roomNumber;
         this.basePrice = basePrice;
+    }
+
+    public String getShortenedPlFormattedDate() {
+        return switch (eventDate.getMonthValue()) {
+            case 1 -> "%d %s %d".formatted(eventDate.getDayOfMonth(), "sty. ", eventDate.getYear());
+            case 2 -> "%d %s %d".formatted(eventDate.getDayOfMonth(), "lut. ", eventDate.getYear());
+            case 3 -> "%d %s %d".formatted(eventDate.getDayOfMonth(), "mar. ", eventDate.getYear());
+            case 4 -> "%d %s %d".formatted(eventDate.getDayOfMonth(), "kwi. ", eventDate.getYear());
+            case 5 -> "%d %s %d".formatted(eventDate.getDayOfMonth(), "maja ", eventDate.getYear());
+            case 6 -> "%d %s %d".formatted(eventDate.getDayOfMonth(), "cze. ", eventDate.getYear());
+            case 7 -> "%d %s %d".formatted(eventDate.getDayOfMonth(), "lip. ", eventDate.getYear());
+            case 8 -> "%d %s %d".formatted(eventDate.getDayOfMonth(), "sie. ", eventDate.getYear());
+            case 9 -> "%d %s %d".formatted(eventDate.getDayOfMonth(), "wrz. ", eventDate.getYear());
+            case 10 -> "%d %s %d".formatted(eventDate.getDayOfMonth(), "paź. ", eventDate.getYear());
+            case 11 -> "%d %s %d".formatted(eventDate.getDayOfMonth(), "lis. ", eventDate.getYear());
+            case 12 -> "%d %s %d".formatted(eventDate.getDayOfMonth(), "gru. ", eventDate.getYear());
+            default -> "";
+        };
+    }
+
+    public String getPlFormattedDate() {
+        var formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", new Locale("pl"));
+        return eventDate.format(formatter);
     }
 
     @Override

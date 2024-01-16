@@ -9,10 +9,21 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="bookingDetailsDiv" id="bookingDetailsDiv">
-
+    <div class="mainContainer" id="mainContainer">
+        <h2>Dziękujemy, transakcja przebiegła pomyślnie</h2>
+        <h3>Oto Twój bilet</h3>
+        <div class="bookingDetailsDiv" id="bookingDetailsDiv">
+            <p class="eventDate" id="eventDate" th:text="'Data: ' + ${booking.showtime.getPlFormattedDate()}">Event date</p>
+            <p class="eventTime" id="eventTime" th:text="'Godzina: ' + ${booking.showtime.getEventTime().toString()}">Event time</p>
+            <p class="roomNumber" id="roomNumber" th:text="'Sala: ' + ${booking.showtime.roomNumber}">Room number</p>
+            <p>Miejsca:</p>
+            <div th:each="seat : ${booking.getBookedSeats()}" class="chosenSeatDetails">
+               <p th:text="'Rząd: ' + ${seat.getRow()} + ', kolumna: ' + ${seat.getColumn()}">Booked seat details</p>
+            </div>
+        </div>
         <img th:src="${'data:image/png;base64,' + base64QRCode}" alt="QR Code">
-        <p class="bookingId" id="bookingId" th:text="${booking.id}">Booking ID</p>
+        <p class="bookingId" id="bookingId" th:text="'Kod zwrotu biletu: ' + ${booking.id}">Booking ID</p>
+        <p class="refundKeyDescription" id="refundKeyDescription">Zapisz powyższy kod w razie potrzeby zwrotu biletu.</p>
     </div>
     <button class="homeButton" id="homeButton"
             th:attr="home_url=@{/showtimes}"

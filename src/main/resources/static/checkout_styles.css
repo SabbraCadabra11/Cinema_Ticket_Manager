@@ -4,6 +4,7 @@ header {
 
 body {
     text-align: center;
+    justify-content: center;
     color: white;
     background-color: #163846;
     font-family: "Roboto Light", sans-serif;
@@ -22,4 +23,11 @@ ul {
     color: white;
     border-radius: 8px;
     transition: background-color 150ms;
+}
+
+.bookingDetailsDiv {
+    text-align: left;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
 }
