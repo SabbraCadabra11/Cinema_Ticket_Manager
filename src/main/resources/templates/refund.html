@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kino XYZ - Zwrot biletu</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/refund_styles.css}" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"
+            integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <h2>Zwrot biletu</h2>
+    <form hx-post="/refund" hx-target="#refundFeedback">
+        <p>Podaj kod zwrotu biletu: <input type="text" th:value="${refundKey}" name="refundKey"></p>
+        <input type="submit" value="Zwróć">
+    </form>
+    <div th:insert="fragments/refund_feedback" id="refundFeedback"></div>
+</body>
+</html>

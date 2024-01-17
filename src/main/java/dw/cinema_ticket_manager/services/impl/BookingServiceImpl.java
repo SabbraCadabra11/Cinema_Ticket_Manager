@@ -15,6 +15,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -31,6 +33,16 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public Optional<Booking> getBookingById(UUID bookingId) {
+        return bookingRepository.findById(bookingId);
+    }
+
+    @Override
+    public void refund(UUID bookingId) {
+        bookingRepository.deleteById(bookingId);
+    }
+
+    @Override
     public String generateQRCodeBase64(String text, int height, int width) throws WriterException, IOException {
         var hints = new HashMap<EncodeHintType, Object>();
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
@@ -38,6 +50,7 @@ public class BookingServiceImpl implements BookingService {
         var qrWriter = new QRCodeWriter();
         var bitMatrix = qrWriter.encode(text, BarcodeFormat.QR_CODE, width, height, hints);
         var outputStream = new ByteArrayOutputStream();
+
         MatrixToImageWriter.writeToStream(bitMatrix, "PNG", outputStream);
         var imgBytes = outputStream.toByteArray();
 
