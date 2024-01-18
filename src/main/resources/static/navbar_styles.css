@@ -1,0 +1,28 @@
+nav {
+    display: inline-flex;
+    width: 100%;
+    background-color: #122D38;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+nav a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #1b4559;
+}
+
+.logo {
+    float: left;
+    height: 20px;
+    width: auto;
+}

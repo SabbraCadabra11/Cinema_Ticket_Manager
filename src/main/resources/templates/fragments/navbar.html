@@ -1,3 +1,5 @@
-<div th:fragment="navbar" class="navbar">
-
-</div>
+<nav th:fragment="navbar">
+    <a th:href="@{/}" class="logo"><img th:src="@{/images/logo.png}" alt="logo" class="logo"></a>
+    <a th:href="@{/showtimes}">Kup bilet</a>
+    <a th:href="@{/refund}">Zwróć bilet</a>
+</nav>

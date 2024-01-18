@@ -30,7 +30,7 @@ public class RefundController {
     }
 
     @PostMapping
-    public String handleRefund(@ModelAttribute("refundKey") String refundKey, Model model) {
+    public String handleRefund(@RequestParam String refundKey, Model model) {
         var uuidPattern = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
         if (!refundKey.matches(uuidPattern)) {
             model.addAttribute("message", "Upewnij się, że podałeś poprawny kod zwrotu");
@@ -43,6 +43,7 @@ public class RefundController {
             var seats = booking.get().getBookedSeats();
             seats.forEach(seat -> seat.setStatus(SeatStatus.AVAILABLE));
             seatService.updateAll(seats);
+            bookingService.refund(bookingId);
             model.addAttribute("message", "Zwrot zakończony pomyślnie");
         } else {
             model.addAttribute("message", "Nie znaleziono biletu o podanym kodzie zwrotu");

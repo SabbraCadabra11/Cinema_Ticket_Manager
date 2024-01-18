@@ -3,6 +3,7 @@ header {
 }
 
 body {
+    margin: 0;
     text-align: center;
     justify-content: center;
     color: white;
@@ -12,4 +13,26 @@ body {
 
 ul {
     list-style: none;
+}
+
+.refundFeedbackMessage {
+
+}
+
+.refundSubmitBtn {
+    margin-top: 20px;
+    border: none;
+    padding: 8px;
+    font-size: 16px;
+    background-color: #2a6277;
+    color: white;
+    border-radius: 8px;
+}
+
+.refundSubmitBtn:hover {
+    background-color: #32738c;
+}
+
+#refundKeyInput {
+    width: 250px;
 }

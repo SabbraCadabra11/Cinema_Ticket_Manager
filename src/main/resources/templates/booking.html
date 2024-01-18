@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Kino XYZ - Rezerwacja</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/booking_styles.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/navbar_styles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/booking_styles.css}"/>
     <script src="https://unpkg.com/htmx.org@1.9.10"
             integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
             crossorigin="anonymous"></script>
 </head>
 <body>
+    <header>
+        <div th:insert="fragments/navbar" id="navbar"></div>
+    </header>
     <div class="mainContainer">
         <div class="movieDetailsDiv" id="movieDetailsDiv">
             <img class="posterImg" th:src="${movie.poster}" th:alt="${movie.title} + ' poster'">
@@ -17,7 +21,7 @@
             <p th:text="${eventDate} + ', ' + ${eventTime}">Event date</p>
         </div>
         <div class="roomLayout" id="roomLayout">
-            <iframe width="300" height="180" th:src="${movie.trailer} + '?controls=0&autoplay=1&mute=1'" title="YouTube video player"
+            <iframe width="415" height="250" th:src="${movie.trailer} + '?controls=0&autoplay=1&mute=1'" title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             <div class="seatsLayout" id="seatsLayout">
                 <table class="seatsTable" id="seatsTable">

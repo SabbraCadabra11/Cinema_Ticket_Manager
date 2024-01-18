@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Kino XYZ - Twój bilet</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/checkout_styles.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/navbar_styles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/checkout_styles.css}"/>
     <script src="https://unpkg.com/htmx.org@1.9.10"
             integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
             crossorigin="anonymous"></script>
 </head>
 <body>
+    <header>
+        <div th:insert="fragments/navbar" id="navbar"></div>
+    </header>
     <div class="mainContainer" id="mainContainer">
         <h2>Dziękujemy, transakcja przebiegła pomyślnie</h2>
         <h3>Oto Twój bilet</h3>
@@ -26,7 +30,7 @@
         <p class="refundKeyDescription" id="refundKeyDescription">Zapisz powyższy kod w razie potrzeby zwrotu biletu.</p>
     </div>
     <button class="homeButton" id="homeButton"
-            th:attr="home_url=@{/showtimes}"
+            th:attr="home_url=@{/}"
             onclick="window.location.href=this.getAttribute('home_url')">
         <p class="homeBtnLabel">Powrót do strony głównej</p>
     </button>

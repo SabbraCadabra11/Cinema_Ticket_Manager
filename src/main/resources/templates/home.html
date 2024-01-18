@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kino XYZ - strona główna</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/navbar_styles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/home_styles.css}"/>
+</head>
+<body>
+    <header>
+        <div th:insert="fragments/navbar" id="navbar"></div>
+    </header>
+    <img th:src="@{images/main_page_background.jpg}" alt="background picture" class="backgroundPhoto">
+</body>
+</html>

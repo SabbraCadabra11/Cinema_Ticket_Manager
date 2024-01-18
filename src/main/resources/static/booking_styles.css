@@ -3,7 +3,7 @@ header {
 }
 
 body {
-    margin-top: 100px;
+    margin: 0;
     color: white;
     background-color: #163846;
     font-family: "Roboto Light", sans-serif;
@@ -75,6 +75,10 @@ ul {
     color: white;
     border-radius: 8px;
     transition: background-color 150ms;
+}
+
+.purchaseButton:hover {
+    background-color: #32738c;
 }
 
 .purchaseBtnLabel {

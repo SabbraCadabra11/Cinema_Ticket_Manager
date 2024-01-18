@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Kino XYZ - Repertuar</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/showtimes_styles.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/navbar_styles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/showtimes_styles.css}"/>
     <script src="https://unpkg.com/htmx.org@1.9.10"
             integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
             crossorigin="anonymous"></script>
 </head>
 <body>
+    <header>
+        <div th:insert="fragments/navbar" id="navbar"></div>
+    </header>
     <div class="mainContainer">
         <div class="dateButtons">
             <button class="btnDate" th:each="date : ${allDates}"

@@ -1,0 +1,22 @@
+header {
+    text-align: center;
+}
+
+body {
+    margin: 0;
+    text-align: center;
+    color: white;
+    background-color: #163846;
+    font-family: "Roboto Light", sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+.backgroundPhoto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}

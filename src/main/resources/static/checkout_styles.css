@@ -3,6 +3,7 @@ header {
 }
 
 body {
+    margin: 0;
     text-align: center;
     justify-content: center;
     color: white;
@@ -15,6 +16,7 @@ ul {
 }
 
 .mainContainer {
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -32,8 +34,12 @@ ul {
     transition: background-color 150ms;
 }
 
+.homeButton:hover {
+    background-color: #32738c;
+}
+
 .bookingDetailsDiv {
-    text-align: left;
+    text-align: center;
     justify-content: center;
     align-items: center;
     width: max-content;

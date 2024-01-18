@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Kino XYZ - Zwrot biletu</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/refund_styles.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/navbar_styles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/refund_styles.css}"/>
     <script src="https://unpkg.com/htmx.org@1.9.10"
             integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
             crossorigin="anonymous"></script>
 </head>
 <body>
+    <header>
+        <div th:insert="fragments/navbar" id="navbar"></div>
+    </header>
     <h2>Zwrot biletu</h2>
-    <form hx-post="/refund" hx-target="#refundFeedback">
-        <p>Podaj kod zwrotu biletu: <input type="text" th:value="${refundKey}" name="refundKey"></p>
-        <input type="submit" value="Zwróć">
+    <form hx-post="/refund" hx-target="#refundFeedback" hx-swap="innerHTML">
+        <label for="refundKeyInput">Podaj kod zwrotu biletu:</label>
+        <input type="text" id="refundKeyInput" name="refundKey" required>
+        <br/>
+        <button class="refundSubmitBtn" type="submit">Zwróć</button>
     </form>
     <div th:insert="fragments/refund_feedback" id="refundFeedback"></div>
 </body>

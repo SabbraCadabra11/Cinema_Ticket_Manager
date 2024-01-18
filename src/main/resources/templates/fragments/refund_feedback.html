@@ -1,2 +1,3 @@
-<p th:if="${message == null}" th:fragment="refund_feedback"></p>
-<p th:unless="${message == null}" th:fragment="refund_feedback" th:text="${message}">Refund feedback</p>
+<p th:if="${message == null}" th:fragment="refund_feedback" class="refundFeedbackMessage"></p>
+<p th:unless="${message == null}" th:fragment="refund_feedback"
+   th:text="${message}" class="refundFeedbackMessage">Refund feedback</p>
