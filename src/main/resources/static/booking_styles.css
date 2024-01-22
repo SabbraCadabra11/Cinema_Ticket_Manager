@@ -28,14 +28,10 @@ ul {
     margin-bottom: 5px;
     margin-right: 5px;
     border: none;
-    border-radius: 1px;
-    color: black;
-    font-size: 10px;
-    background-color: #95b75c;
 }
 
 #btnSeatAvailable:hover {
-    background-color: #7a9349;
+    filter: brightness(120%);
 }
 
 #btnSeatChosen {
@@ -44,14 +40,10 @@ ul {
     margin-bottom: 5px;
     margin-right: 5px;
     border: none;
-    border-radius: 1px;
-    color: white;
-    font-size: 10px;
-    background-color: #6c2727;
 }
 
 #btnSeatChosen:hover {
-    background-color: #7c2d2d;
+    filter: brightness(120%);
 }
 
 #btnSeatOccupied {
@@ -60,10 +52,6 @@ ul {
     margin-bottom: 5px;
     margin-right: 5px;
     border: none;
-    border-radius: 1px;
-    color: white;
-    font-size: 10px;
-    background-color: #4d4d4d;
 }
 
 .purchaseButton {
