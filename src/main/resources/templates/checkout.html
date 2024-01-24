@@ -24,10 +24,12 @@
             <div th:each="seat : ${booking.getBookedSeats()}" class="chosenSeatDetails">
                <p th:text="'Rząd: ' + ${seat.getRow()} + ', kolumna: ' + ${seat.getColumn()}">Booked seat details</p>
             </div>
+            <img th:src="${'data:image/png;base64,' + base64QRCode}" class="ticketQrCode" alt="QR Code">
         </div>
-        <img th:src="${'data:image/png;base64,' + base64QRCode}" alt="QR Code">
-        <p class="bookingId" id="bookingId" th:text="'Kod zwrotu biletu: ' + ${booking.id}">Booking ID</p>
-        <p class="refundKeyDescription" id="refundKeyDescription">Zapisz powyższy kod w razie potrzeby zwrotu biletu.</p>
+        <div class="refundDetailsDiv" id="refundDetailsDiv">
+            <p class="bookingId" id="bookingId" th:text="'Kod zwrotu biletu: ' + ${booking.id}">Booking ID</p>
+            <p class="refundKeyDescription" id="refundKeyDescription">Zapisz powyższy kod w razie potrzeby zwrotu biletu.</p>
+        </div>
     </div>
     <button class="homeButton" id="homeButton"
             th:attr="home_url=@{/}"
