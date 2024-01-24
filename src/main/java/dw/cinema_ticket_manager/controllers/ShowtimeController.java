@@ -54,10 +54,18 @@ public class ShowtimeController {
                     .computeIfAbsent(movie, k -> new ArrayList<>())
                     .add(showtime);
         }
+
+        moviesWithShowtimes.forEach((movie, showtimeList) ->
+                showtimeList.sort(Comparator.comparing(Showtime::getEventTime)));
+
         return moviesWithShowtimes.entrySet()
                 .stream()
                 .sorted(Comparator.comparing(entry -> entry.getKey().getTitle()))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1, LinkedHashMap::new
+                ));
     }
 
     private List<LocalDate> getAllShowtimeDates() {

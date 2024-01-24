@@ -16,7 +16,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "showtimes")
-public class Showtime {
+public class Showtime implements Comparable<Showtime> {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
@@ -80,5 +80,10 @@ public class Showtime {
     @Override
     public int hashCode() {
         return Objects.hash(eventDate, eventTime, movie, room);
+    }
+
+    @Override
+    public int compareTo(Showtime o) {
+        return this.getEventTime().compareTo(o.getEventTime());
     }
 }

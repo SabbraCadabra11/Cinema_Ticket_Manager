@@ -2,15 +2,16 @@ package dw.cinema_ticket_manager.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class RoomFactory {
     private Map<Integer, String> roomTemplates;
     public RoomFactory() {
         this.roomTemplates = new HashMap<>();
-        roomTemplates.put(1, "8,16");
-        roomTemplates.put(2, "11,15");
+        roomTemplates.put(1, "6,9");
+        roomTemplates.put(2, "7,7");
+        roomTemplates.put(3, "8,17");
+        roomTemplates.put(4, "10,14");
     }
 
     public Room getRoomCopy(int roomNumber) {
