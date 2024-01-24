@@ -8,6 +8,14 @@
     <script src="https://unpkg.com/htmx.org@1.9.10"
             integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
             crossorigin="anonymous"></script>
+    <script>
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                window.location.reload();
+            }
+        });
+        window.addEventListener('unload', function(){});
+    </script>
 </head>
 <body>
     <header>
@@ -23,27 +31,8 @@
         <div class="roomLayout" id="roomLayout">
             <iframe width="415" height="250" th:src="${movie.trailer} + '?controls=0&autoplay=1&mute=1'" title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            <div class="seatsLayout" id="seatsLayout">
-                <table class="seatsTable" id="seatsTable">
-                    <tr th:each="row : ${seats}">
-                        <td th:each="seat : ${row}">
-                            <img th:src="@{images/seat_available.png}" th:fragment="seatButtonAvailable"
-                                 th:if="${seat.getStatus() == T(dw.cinema_ticket_manager.model.SeatStatus).AVAILABLE}"
-                                 class="seatButton" id="btnSeatAvailable"
-                                 th:attr="hx-post=@{/booking(row=${seat.row},column=${seat.column},chosen='true')}"
-                                 hx-swap="outerHTML" hx-boost="true" alt="available seat">
-                            <img th:src="@{images/seat_chosen.png}" th:fragment="seatButtonChosen"
-                                 th:if="${seat.getStatus() == T(dw.cinema_ticket_manager.model.SeatStatus).RESERVED}"
-                                 class="seatButton" id="btnSeatChosen"
-                                 th:attr="hx-post=@{/booking(row=${seat.row},column=${seat.column},chosen='false')}"
-                                 hx-swap="outerHTML" hx-boost="true" alt="chosen seat">
-                            <img th:src="@{images/seat_occupied.png}" th:fragment="seatButtonOccupied"
-                                 th:if="${seat.getStatus() == T(dw.cinema_ticket_manager.model.SeatStatus).OCCUPIED}"
-                                 class="seatButton" id="btnSeatOccupied" alt="occupied seat">
-                        </td>
-                    </tr>
-                </table>
-            </div>
+            <div th:insert="fragments/seats_layout" class="seatsLayout" id="seatsLayout"
+                th:hx-get="@{/seats}" hx-trigger="load" hx-boost="true"></div>
         </div>
         <div class="bookingDetailsDiv" id="bookingDetailsDiv">
             <p th:fragment="initialPriceLabel" class="priceLabel"
@@ -67,7 +56,7 @@
                     </tr>
                 </table>
             </div>
-            <button class="purchaseButton" id="purchaseButton"
+            <button th:fragment="purchaseButton" class="purchaseButton" id="purchaseButton"
                     th:attr="purchase_url=@{/booking/purchase}"
                     onclick="window.location.href=this.getAttribute('purchase_url')">
                 <p class="purchaseBtnLabel">Kup teraz</p>

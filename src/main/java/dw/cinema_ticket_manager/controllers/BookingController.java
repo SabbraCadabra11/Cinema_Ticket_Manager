@@ -73,7 +73,8 @@ public class BookingController {
         }
         model.addAttribute("seat", seat);
         return seat.getStatus() == SeatStatus.AVAILABLE
-                ? "booking :: seatButtonAvailable" : "booking :: seatButtonChosen";
+                ? "fragments/seats_layout :: seatButtonAvailable"
+                : "fragments/seats_layout :: seatButtonChosen";
     }
 
     @GetMapping("/updatePrice")
@@ -88,6 +89,13 @@ public class BookingController {
         model.addAttribute("chosenSeats", chosenSeats);
         model.addAttribute("seatPrice", showtime.getBasePrice());
         return "booking :: chosenSeatsDetails";
+    }
+
+    @GetMapping("/seats")
+    public String renderSeats(Model model) {
+        var seats = seatService.getSeatsInRowsFromRoom(room);
+        model.addAttribute("seats", seats);
+        return "booking :: seatsLayout";
     }
 
     @GetMapping("/purchase")
