@@ -38,8 +38,8 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public void updateAll(List<Seat> seats) {
-        seats.forEach(seat -> seat.setStatus(SeatStatus.OCCUPIED));
+    public void updateAll(List<Seat> seats, SeatStatus status) {
+        seats.forEach(seat -> seat.setStatus(status));
         seatRepository.saveAll(seats);
     }
 }

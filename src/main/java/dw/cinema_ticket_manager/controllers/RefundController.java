@@ -41,8 +41,7 @@ public class RefundController {
         var booking = bookingService.getBookingById(bookingId);
         if (booking.isPresent()) {
             var seats = booking.get().getBookedSeats();
-            seats.forEach(seat -> seat.setStatus(SeatStatus.AVAILABLE));
-            seatService.updateAll(seats);
+            seatService.updateAll(seats, SeatStatus.AVAILABLE);
             bookingService.refund(bookingId);
             model.addAttribute("message", "Zwrot zakończony pomyślnie");
         } else {

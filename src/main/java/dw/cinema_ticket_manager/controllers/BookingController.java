@@ -105,7 +105,7 @@ public class BookingController {
         }
 
         var booking = new Booking(showtime, chosenSeats);
-        seatService.updateAll(chosenSeats);
+        seatService.updateAll(chosenSeats, SeatStatus.OCCUPIED);
         bookingService.save(booking);
         var base64QRCode = bookingService.generateQRCodeBase64(booking.getId().toString(), 200, 200);
         model.addAttribute("booking", booking);
