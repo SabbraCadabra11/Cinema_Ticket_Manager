@@ -5,6 +5,7 @@ import dw.cinema_ticket_manager.model.*;
 import dw.cinema_ticket_manager.services.impl.BookingServiceImpl;
 import dw.cinema_ticket_manager.services.impl.SeatServiceImpl;
 import dw.cinema_ticket_manager.services.impl.ShowtimeServiceImpl;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +23,6 @@ public class BookingController {
     private final ShowtimeServiceImpl showtimeService;
     private final BookingServiceImpl bookingService;
     private final SeatServiceImpl seatService;
-    private final List<Seat> chosenSeats;
-    private Showtime showtime;
-    private Room room;
 
     @Autowired
     public BookingController(ShowtimeServiceImpl showtimeService,
@@ -33,22 +31,20 @@ public class BookingController {
         this.showtimeService = showtimeService;
         this.bookingService = bookingService;
         this.seatService = seatService;
-        showtime = null;
-        room = null;
-        chosenSeats = new ArrayList<>();
     }
 
     @GetMapping(params = "showtimeId")
-    public String renderBookingPage(@RequestParam(name = "showtimeId") String showtimeId, Model model) {
-        chosenSeats.clear();
-        showtime = showtimeService.getShowtimeById(UUID.fromString(showtimeId));
-        room = showtime.getRoom();
+    public String renderBookingPage(@RequestParam(name = "showtimeId") String showtimeId, Model model, HttpSession session) {
+        session.removeAttribute("chosenSeats");
+        Showtime showtime = showtimeService.getShowtimeById(UUID.fromString(showtimeId));
+        Room room = showtime.getRoom();
         model.addAttribute("movie", showtime.getMovie());
         model.addAttribute("roomNumber", showtime.getRoom().getRoomNumber());
         model.addAttribute("eventDate", showtime.getShortenedPlFormattedDate());
         model.addAttribute("eventTime", showtime.getEventTime().toString());
         model.addAttribute("seats", seatService.getSeatsInRowsFromRoom(room));
-        model.addAttribute("chosenSeats", chosenSeats);
+        session.setAttribute("showtime", showtime);
+        session.setAttribute("room", room);
         return "booking";
     }
 
@@ -56,15 +52,22 @@ public class BookingController {
     public String handleSeatClick(@RequestParam(name = "row") int seatRow,
                                   @RequestParam(name = "column") int seatColumn,
                                   @RequestParam(name = "chosen") String chosen,
-                                  Model model) {
+                                  Model model, HttpSession session) {
 
+        Room room = (Room) session.getAttribute("room");
         if (seatRow < 1 || seatRow > room.getRows() || seatColumn < 1 || seatColumn > room.getColumns()) {
-            //TODO: handle this properly
+            // TODO: handle this properly
             return "Invalid parameters";
         }
 
-        var seat = seatService.getSeatByRoomRowAndColumn(room, seatRow, seatColumn);
-        if (chosen.equals("true")) {
+        Seat seat = seatService.getSeatByRoomRowAndColumn(room, seatRow, seatColumn);
+        List<Seat> chosenSeats = (List<Seat>) session.getAttribute("chosenSeats");
+        if (chosenSeats == null) {
+            chosenSeats = new ArrayList<>();
+            session.setAttribute("chosenSeats", chosenSeats);
+        }
+
+        if (Boolean.parseBoolean(chosen)) {
             chosenSeats.add(seat);
             seat.setStatus(SeatStatus.RESERVED);
         } else {
@@ -78,32 +81,39 @@ public class BookingController {
     }
 
     @GetMapping("/updatePrice")
-    public String updatePriceLabel(Model model) {
-        int totalPrice = showtime.getBasePrice() * chosenSeats.size();
+    public String updatePriceLabel(Model model, HttpSession session) {
+        Showtime showtime = (Showtime) session.getAttribute("showtime");
+        List<Seat> chosenSeats = (List<Seat>) session.getAttribute("chosenSeats");
+        int totalPrice = showtime.getBasePrice() * (chosenSeats != null ? chosenSeats.size() : 0);
         model.addAttribute("totalPrice", totalPrice);
         return "booking :: updatedPriceLabel";
     }
 
     @GetMapping("/updateSeatsList")
-    public String updateChosenSeatsList(Model model) {
+    public String updateChosenSeatsList(Model model, HttpSession session) {
+        List<Seat> chosenSeats = (List<Seat>) session.getAttribute("chosenSeats");
+        Showtime showtime = (Showtime) session.getAttribute("showtime");
         model.addAttribute("chosenSeats", chosenSeats);
         model.addAttribute("seatPrice", showtime.getBasePrice());
         return "booking :: chosenSeatsDetails";
     }
 
     @GetMapping("/seats")
-    public String renderSeats(Model model) {
+    public String renderSeats(Model model, HttpSession session) {
+        Room room = (Room) session.getAttribute("room");
         var seats = seatService.getSeatsInRowsFromRoom(room);
         model.addAttribute("seats", seats);
         return "booking :: seatsLayout";
     }
 
     @GetMapping("/purchase")
-    public String redirectToPurchased(Model model) throws IOException, WriterException {
-        if (chosenSeats.isEmpty()) {
-            //TODO: handle this properly
+    public String redirectToPurchased(Model model, HttpSession session) throws IOException, WriterException {
+        List<Seat> chosenSeats = (List<Seat>) session.getAttribute("chosenSeats");
+        if (chosenSeats == null || chosenSeats.isEmpty()) {
+            // TODO: handle this properly
         }
 
+        Showtime showtime = (Showtime) session.getAttribute("showtime");
         var booking = new Booking(showtime, chosenSeats);
         seatService.updateAll(chosenSeats, SeatStatus.OCCUPIED);
         bookingService.save(booking);
@@ -112,7 +122,6 @@ public class BookingController {
         model.addAttribute("base64QRCode", base64QRCode);
         return "checkout";
     }
-
 }
 
 
